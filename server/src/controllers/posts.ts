@@ -12,7 +12,9 @@ export const getPosts = async (req: Request, res: Response) => {
         .limit(LIMIT * 1)
         .skip((+page - 1) * LIMIT)
         .sort({ createdAt: -1 })
-        .populate("user")
+        .populate({
+            path: "user",
+        })
 
     // Getting the numbers of products stored in database
     const count = await Post.countDocuments()

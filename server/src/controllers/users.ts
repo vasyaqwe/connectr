@@ -54,17 +54,6 @@ export const getUser = async (req: Request, res: Response) => {
     res.json(user)
 }
 
-export const getUsers = async (_req: Request, res: Response) => {
-    const users = await User.find({})
-
-    if (!users?.length) {
-        res.status(400).json({ message: "No users found!" })
-        return
-    }
-
-    res.json(users)
-}
-
 export const getUserConnections = async (req: Request, res: Response) => {
     const { id } = req.params
     const user = await User.findById(id)
@@ -78,6 +67,7 @@ export const getUserConnections = async (req: Request, res: Response) => {
         res.status(400).json({ message: "No user found!" })
         return
     }
+
     const connections = user.populate("connections")
 
     res.json(connections)

@@ -3,7 +3,6 @@ const router = express.Router({ mergeParams: true })
 import {
     createUser,
     getUser,
-    getUsers,
     getUserConnections,
     toggleConnect,
     checkEmail,
@@ -12,7 +11,7 @@ import {
 import { isLoggedIn, zParse } from "../middleware"
 import { userSchema } from "../lib/validations/user"
 
-router.route("/").get(isLoggedIn, getUsers).post(zParse(userSchema), createUser)
+router.route("/").post(zParse(userSchema), createUser)
 
 router.post("/check-email", checkEmail)
 router.post("/check-username", checkUsername)
