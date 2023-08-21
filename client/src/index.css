@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+}
+
+body,
+#root {
+    min-height: 100vh;
+}
+
+a {
+    text-decoration-skip-ink: auto;
+    text-decoration: none;
+    color: currentColor;
+}
+
+img,
+picture,
+video {
+    max-width: 100%;
+    display: block;
+}
+
+input:not(input[type="checkbox"]):not(input[type="radio"]) {
+    width: 100%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+html {
+    scrollbar-color: #7e88c3 #252945;
+}
+
+::-webkit-scrollbar {
+    width: 0.4rem;
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 100vmax;
+    background-color: #252945;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 100vmax;
+    background-color: #7e88c3;
+}
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgb(0 0 0 / 0.7);
+    z-index: 5;
+}
+
+.modal {
+    position: fixed;
+    z-index: 5;
+    border-radius: 1rem;
+}
+
+@layer components {
+    .link {
+        @apply text-accent-400 hover:underline
+             focus:outline-none
+                       focus-visible:outline-accent-300 rounded-sm;
+    }
+    
+    .label {
+        @apply font-medium mb-[2px] inline-block;
+    }
+
+    .gradient-text {
+        @apply text-transparent bg-clip-text bg-gradient-to-l from-accent-300 to-accent-400;
+    }
+
+    .card {
+        @apply rounded-2xl bg-gradient-to-tr from-white to-accent-100 w-full border border-neutral-500 max-w-md mx-auto shadow-lg flex flex-col gap-5 p-4 lg:p-7;
+    }
+}
