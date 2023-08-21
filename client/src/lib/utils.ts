@@ -1,5 +1,9 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import jwtDecode from "jwt-decode"
+import { DecodedToken, Post } from "@/types"
+import { getCurrentAccessToken } from "@/api/config"
+import { Comment } from "@/types"
 
 export const cn = (...inputs: ClassValue[]) => {
     return twMerge(clsx(inputs))
@@ -61,3 +65,37 @@ export const getRandomNumberRange = (min: number, max: number) => {
 
 export const safeError = (error: unknown) =>
     error && error instanceof Error ? error.message : ""
+
+export const optimisticallyUpdatedConnections = (data: Comment) => {
+    const accessToken = getCurrentAccessToken()
+
+    if (accessToken) {
+        const user: DecodedToken = jwtDecode(accessToken)
+
+        const connected = data.user.connections.includes(user._id)
+
+        const updatedConnections = connected
+            ? data.user.connections.filter(
+                  (userConnection) => userConnection !== user._id
+              )
+            : [...data.user.connections, user._id]
+
+        return updatedConnections
+    }
+}
+
+export const optimisticallyUpdatedLikes = (data: Post) => {
+    const accessToken = getCurrentAccessToken()
+
+    if (accessToken) {
+        const user: DecodedToken = jwtDecode(accessToken)
+
+        const liked = data.likes.includes(user._id)
+
+        const updatedLikes = liked
+            ? data.likes.filter((userLike) => userLike !== user._id)
+            : [...data.likes, user._id]
+
+        return updatedLikes
+    }
+}

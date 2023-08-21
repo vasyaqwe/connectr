@@ -8,6 +8,10 @@ import { toggleConnect } from "@/api/users"
 import { PostHeader, PostBody, PostFooter } from "../Post"
 import { PostCommentsModule } from "./PostCommentsModule"
 import { NewPostComment } from "./NewPostComment"
+import {
+    optimisticallyUpdatedConnections,
+    optimisticallyUpdatedLikes,
+} from "@/lib/utils"
 
 export const Post = forwardRef<HTMLDivElement, { post: PostType }>(
     ({ post }, ref) => {
@@ -28,12 +32,8 @@ export const Post = forwardRef<HTMLDivElement, { post: PostType }>(
                         queryClient.getQueryData<PostType>(queryKey)
 
                     if (prevData) {
-                        const liked = prevData.likes.includes(user._id)
-                        const updatedLikes = liked
-                            ? prevData.likes.filter(
-                                  (userLike) => userLike !== user._id
-                              )
-                            : [...prevData.likes, user._id]
+                        const updatedLikes =
+                            optimisticallyUpdatedLikes(prevData)
 
                         queryClient.setQueryData(queryKey, {
                             ...prevData,
@@ -70,15 +70,8 @@ export const Post = forwardRef<HTMLDivElement, { post: PostType }>(
                         queryClient.getQueryData<PostType>(queryKey)
 
                     if (prevData) {
-                        const connected = prevData.user.connections.includes(
-                            user._id
-                        )
-
-                        const updatedConnections = connected
-                            ? prevData.user.connections.filter(
-                                  (userLike) => userLike !== user._id
-                              )
-                            : [...prevData.user.connections, user._id]
+                        const updatedConnections =
+                            optimisticallyUpdatedConnections(prevData)
 
                         queryClient.setQueryData(queryKey, {
                             ...prevData,

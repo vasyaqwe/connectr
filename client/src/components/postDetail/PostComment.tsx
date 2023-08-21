@@ -1,6 +1,10 @@
 import { useAuth } from "@/hooks/useAuth"
 import { Comment, DecodedToken, PaginatedData, Post } from "@/types"
-import { formatRelativeDate, formatNumber } from "@/lib/utils"
+import {
+    formatRelativeDate,
+    formatNumber,
+    optimisticallyUpdatedConnections,
+} from "@/lib/utils"
 import location from "@/assets/location-small.svg"
 import link from "@/assets/link.svg"
 import trash from "@/assets/trash.svg"
@@ -22,6 +26,7 @@ import { deleteComment, likeComment } from "@/api/comments"
 import { useErrorToast } from "@/hooks/useErrorToast"
 import { useStore } from "@/stores/useStore"
 import { DropdownMenu, DropdownMenuOptions } from "../ui/DropdownMenu"
+import { toggleConnect } from "@/api/users"
 
 type PostCommentProps = {
     comment: Comment
@@ -97,6 +102,60 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
             }
         )
 
+        const { error: connectError, mutate: onToggleConnect } = useMutation(
+            () => toggleConnect(user._id, comment.user._id),
+            {
+                onMutate: async () => {
+                    // Stop the queries that may affect this operation
+                    await queryClient.cancelQueries(queryKey)
+
+                    const prevData =
+                        queryClient.getQueryData<CommentsInfiniteData>(queryKey)
+
+                    if (prevData) {
+                        const updatedPages = prevData.pages.map((page) => ({
+                            ...page,
+                            comments: page.comments.map((paginatedComment) => {
+                                const updatedConnections =
+                                    optimisticallyUpdatedConnections(
+                                        paginatedComment
+                                    )
+
+                                return {
+                                    ...paginatedComment,
+                                    user: {
+                                        ...paginatedComment.user,
+                                        connections: updatedConnections,
+                                    },
+                                }
+                            }),
+                        }))
+
+                        queryClient.setQueryData(queryKey, {
+                            ...prevData,
+                            pages: updatedPages,
+                        })
+                    }
+
+                    return {
+                        prevData,
+                    }
+                },
+                onError: (_error, _postId, context) => {
+                    if (context?.prevData) {
+                        queryClient.setQueryData<CommentsInfiniteData>(
+                            queryKey,
+                            context.prevData
+                        )
+                    }
+                },
+                onSuccess: () => {
+                    queryClient.invalidateQueries(queryKey)
+                    queryClient.invalidateQueries(["users", user._id])
+                },
+            }
+        )
+
         const {
             error: deleteError,
             isLoading,
@@ -116,6 +175,7 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
         )
 
         useErrorToast(error)
+        useErrorToast(connectError)
         useErrorToast(deleteError)
 
         const dropdownMenuOptions: DropdownMenuOptions = [
@@ -175,7 +235,7 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
                                 variant={isConnected ? "iconActive" : "icon"}
                                 onClick={(e) => {
                                     e.preventDefault()
-                                    // onToggleConnect()
+                                    onToggleConnect()
                                 }}
                             >
                                 {isConnected ? (

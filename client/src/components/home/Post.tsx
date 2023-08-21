@@ -1,18 +1,16 @@
-import { DecodedToken, PaginatedData, Post as PostType } from "@/types"
+import { DecodedToken, Post as PostType, PostsInfiniteData } from "@/types"
 import { useErrorToast } from "@/hooks/useErrorToast"
-import {
-    InfiniteData,
-    useMutation,
-    useQueryClient,
-} from "@tanstack/react-query"
+import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { likePost } from "@/api/posts"
 import { useAuth } from "@/hooks/useAuth"
 import { forwardRef } from "react"
 import { toggleConnect } from "@/api/users"
 import { useNavigate } from "react-router-dom"
 import { PostHeader, PostBody, PostFooter } from "../Post"
-
-type PostsInfiniteData = InfiniteData<PaginatedData<PostType, "posts">>
+import {
+    optimisticallyUpdatedConnections,
+    optimisticallyUpdatedLikes,
+} from "@/lib/utils"
 
 export const Post = forwardRef<HTMLElement, { post: PostType }>(
     ({ post }, ref) => {
@@ -39,14 +37,8 @@ export const Post = forwardRef<HTMLElement, { post: PostType }>(
                             if (paginatedPost._id !== post._id) {
                                 return paginatedPost
                             }
-
-                            const liked = paginatedPost.likes.includes(user._id)
-
-                            const updatedLikes = liked
-                                ? paginatedPost.likes.filter(
-                                      (userLike) => userLike !== user._id
-                                  )
-                                : [...paginatedPost.likes, user._id]
+                            const updatedLikes =
+                                optimisticallyUpdatedLikes(paginatedPost)
 
                             return {
                                 ...paginatedPost,
@@ -91,16 +83,8 @@ export const Post = forwardRef<HTMLElement, { post: PostType }>(
                     const updatedPages = prevData?.pages.map((page) => ({
                         ...page,
                         posts: page.posts.map((paginatedPost) => {
-                            const connected =
-                                paginatedPost.user.connections.includes(
-                                    user._id
-                                )
-
-                            const updatedConnections = connected
-                                ? paginatedPost.user.connections.filter(
-                                      (userLike) => userLike !== user._id
-                                  )
-                                : [...paginatedPost.user.connections, user._id]
+                            const updatedConnections =
+                                optimisticallyUpdatedConnections(paginatedPost)
 
                             return {
                                 ...paginatedPost,

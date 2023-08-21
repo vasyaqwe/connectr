@@ -1,5 +1,6 @@
 import { ValidationErrors } from "@/hooks/useFormValidation"
 import { userSchema } from "@/lib/validations/user"
+import { InfiniteData } from "@tanstack/react-query"
 import * as z from "zod"
 
 export type PaginatedData<T, K extends string> = {
@@ -78,3 +79,9 @@ export type MultiStepFormStep<TStepName = string> = {
     onSubmit?: () => void
     component: React.FC<SignUpStepProps>
 }
+
+export type CommentsInfiniteData = InfiniteData<
+    PaginatedData<Comment, "comments">
+>
+
+export type PostsInfiniteData = InfiniteData<PaginatedData<Post, "posts">>

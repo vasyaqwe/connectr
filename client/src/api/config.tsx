@@ -8,7 +8,7 @@ export const API_URL =
 import { useAuthStore } from "@/stores/useAuthStore"
 import { refresh } from "./auth"
 
-const getCurrentAccessToken = () => useAuthStore.getState().token
+export const getCurrentAccessToken = () => useAuthStore.getState().token
 
 export const defaultAxios = axios.create({ baseURL: API_URL })
 
