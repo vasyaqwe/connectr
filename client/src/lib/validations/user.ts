@@ -19,5 +19,16 @@ export const userSchema = z.object({
         })
         .nonempty({ message: "Required" }),
     location: z.string().optional(),
-    bio: z.string().optional(),
+    bio: z
+        .string()
+        .refine(
+            (val) => {
+                if (val === "") {
+                    return true // Allow empty bio
+                }
+                return val.length >= 10
+            },
+            { message: "Must be minimum 10 characters long" }
+        )
+        .optional(),
 })

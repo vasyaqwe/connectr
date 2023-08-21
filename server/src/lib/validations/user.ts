@@ -17,8 +17,8 @@ export const userSchema = z.object({
     }),
     connections: z.array(z.instanceof(Types.ObjectId)).optional(),
     googleId: z.string().optional(),
-    location: z.string().optional(),
+    location: z.string().nonempty().optional(),
     profileImageUrl: z.string().optional(),
-    bio: z.string().optional(),
+    bio: z.string().min(10).optional(),
     profileViews: z.number().optional(),
 })

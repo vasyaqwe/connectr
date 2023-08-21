@@ -126,12 +126,7 @@ export const Post = forwardRef<HTMLDivElement, { post: PostType }>(
                     onLike={onLike}
                 />
                 <NewPostComment post={post} />
-                {post.comments.length > 0 && (
-                    <PostCommentsModule
-                        post={post}
-                        onToggleConnect={onToggleConnect}
-                    />
-                )}
+                {post.comments.length > 0 && <PostCommentsModule post={post} />}
             </div>
         )
     }

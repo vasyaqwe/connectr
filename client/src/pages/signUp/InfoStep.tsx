@@ -1,11 +1,13 @@
 import { SignUpStepProps } from "@/types"
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
-import { useSignUpStore } from "@/stores/useSignUpStore"
 
-export const InfoStep = ({ errors, isLoading }: SignUpStepProps) => {
-    const { onChange, formData, onBack } = useSignUpStore()
-
+export const InfoStep = ({
+    errors,
+    formData,
+    onChange,
+    onBack,
+}: SignUpStepProps) => {
     return (
         <>
             <div>
@@ -34,7 +36,6 @@ export const InfoStep = ({ errors, isLoading }: SignUpStepProps) => {
                     About yourself (optional)
                 </label>
                 <Input
-                    autoFocus
                     invalid={errors.bio}
                     placeholder="Your bio"
                     value={formData.bio}
@@ -62,8 +63,6 @@ export const InfoStep = ({ errors, isLoading }: SignUpStepProps) => {
             </div>
             <div className="flex flex-col gap-3 mt-3 items-center">
                 <Button
-                    isLoading={isLoading}
-                    disabled={isLoading}
                     className={`justify-center w-full`}
                     arrow={"next"}
                 >

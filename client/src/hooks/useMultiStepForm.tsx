@@ -1,9 +1,13 @@
+import { MultiStepFormStep } from "@/types"
 import { useState } from "react"
 
-export const useMultiStepForm = (steps) => {
-    const [currentStep, setCurrentStep] = useState(steps[0])
+export const useMultiStepForm = <TStepName,>(
+    steps: MultiStepFormStep<TStepName>[]
+) => {
+    const [currentStep, setCurrentStep] = useState(steps[0]!)
 
     const lastStep = currentStep.idx === steps.length - 1
+    const firstStep = currentStep.idx === 0
 
     const onNext = () => {
         if (!lastStep) {
@@ -12,7 +16,8 @@ export const useMultiStepForm = (steps) => {
                     ? currentStep.idx
                     : currentStep.idx + 1
 
-            setCurrentStep(steps.find((s) => s.idx === newIdx))
+            const newStep = steps.find((s) => s.idx === newIdx)
+            if (newStep) setCurrentStep(newStep)
         }
     }
 
@@ -20,8 +25,14 @@ export const useMultiStepForm = (steps) => {
         const newIdx =
             currentStep.idx <= 0 ? currentStep.idx : currentStep.idx - 1
 
-        setCurrentStep(steps.find((s) => s.idx === newIdx))
+        const newStep = steps.find((s) => s.idx === newIdx)
+        if (newStep) setCurrentStep(newStep)
     }
 
-    return { onNext, onBack, goToStep, currentStep }
+    const goToStep = (stepName: TStepName) => {
+        const newStep = steps.find((s) => s.name === stepName)
+        if (newStep) setCurrentStep(newStep)
+    }
+
+    return { onNext, onBack, goToStep, currentStep, firstStep, lastStep }
 }

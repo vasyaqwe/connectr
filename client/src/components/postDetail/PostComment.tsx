@@ -25,14 +25,13 @@ import { DropdownMenu, DropdownMenuOptions } from "../ui/DropdownMenu"
 
 type PostCommentProps = {
     comment: Comment
-    onToggleConnect: () => void
     post: Post
 }
 
 type CommentsInfiniteData = InfiniteData<PaginatedData<Comment, "comments">>
 
 const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
-    ({ comment, onToggleConnect, post }, ref) => {
+    ({ comment, post }, ref) => {
         const user = useAuth() as DecodedToken
 
         const { openToast } = useStore()
@@ -135,7 +134,7 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
             },
         ]
 
-        const isConnected = post.user.connections.includes(user._id)
+        const isConnected = comment.user.connections.includes(user._id)
 
         return (
             <div
@@ -176,7 +175,7 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
                                 variant={isConnected ? "iconActive" : "icon"}
                                 onClick={(e) => {
                                     e.preventDefault()
-                                    onToggleConnect()
+                                    // onToggleConnect()
                                 }}
                             >
                                 {isConnected ? (

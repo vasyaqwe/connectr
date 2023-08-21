@@ -131,6 +131,7 @@ export const Post = forwardRef<HTMLElement, { post: PostType }>(
                 },
                 onSuccess: () => {
                     queryClient.invalidateQueries(queryKey)
+                    queryClient.invalidateQueries(["users", user._id])
                 },
             }
         )

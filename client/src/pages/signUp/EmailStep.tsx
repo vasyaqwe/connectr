@@ -1,12 +1,14 @@
 import { Button } from "@/components/ui/Button"
 import { GoogleLoginButton } from "@/components/ui/GoogleLoginButton"
 import { Input } from "@/components/ui/Input"
-import { useSignUpStore } from "@/stores/useSignUpStore"
 import { SignUpStepProps } from "@/types"
 
-export const EmailStep = ({ errors, isLoading }: SignUpStepProps) => {
-    const { onChange, formData } = useSignUpStore()
-
+export const EmailStep = ({
+    errors,
+    isLoading,
+    formData,
+    onChange,
+}: SignUpStepProps) => {
     return (
         <>
             <div>

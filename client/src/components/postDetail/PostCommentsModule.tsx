@@ -7,12 +7,9 @@ import { useIntersection } from "@mantine/hooks"
 import { Spinner } from "../ui/Spinner"
 import { ErrorMessage } from "../ui/ErrorMessage"
 
-type PostCommentsModuleProps = { post: Post; onToggleConnect: () => void }
+type PostCommentsModuleProps = { post: Post }
 
-export const PostCommentsModule = ({
-    post,
-    onToggleConnect,
-}: PostCommentsModuleProps) => {
+export const PostCommentsModule = ({ post }: PostCommentsModuleProps) => {
     const lastCommentRef = useRef<HTMLDivElement>(null)
 
     const { ref, entry } = useIntersection({
@@ -71,7 +68,6 @@ export const PostCommentsModule = ({
                             <PostComment
                                 key={comment._id}
                                 ref={ref}
-                                onToggleConnect={onToggleConnect}
                                 post={post}
                                 comment={comment}
                             />
@@ -81,7 +77,6 @@ export const PostCommentsModule = ({
                         <PostComment
                             key={comment._id}
                             ref={ref}
-                            onToggleConnect={onToggleConnect}
                             post={post}
                             comment={comment}
                         />

@@ -8,6 +8,7 @@ export const signUpSchema = z
         username: userSchema.shape.username,
         password: userSchema.shape.password,
         location: userSchema.shape.location,
+        bio: userSchema.shape.bio,
         confirmPassword: userSchema.shape.password,
     })
     .refine((data) => data.password === data.confirmPassword, {

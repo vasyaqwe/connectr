@@ -59,7 +59,10 @@ export type Comment = RawComment & {
 
 export type SignUpStepProps = {
     errors: ValidationErrors
+    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    formData: UserFormData
     isLoading?: boolean
+    onBack?: () => void
 }
 
 export type UserCredentials = {
@@ -67,8 +70,11 @@ export type UserCredentials = {
     password: string
 }
 
-export type CurrentStep<TStepName = string> = {
+export type MultiStepFormStep<TStepName = string> = {
     idx: number
     name: TStepName
     requiredFields: string[]
+    isLoading?: boolean
+    onSubmit?: () => void
+    component: React.FC<SignUpStepProps>
 }

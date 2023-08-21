@@ -1,11 +1,14 @@
 import { SignUpStepProps } from "@/types"
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
-import { useSignUpStore } from "@/stores/useSignUpStore"
 
-export const UsernameStep = ({ errors, isLoading }: SignUpStepProps) => {
-    const { onChange, formData, onBack } = useSignUpStore()
-
+export const UsernameStep = ({
+    errors,
+    isLoading,
+    onChange,
+    formData,
+    onBack,
+}: SignUpStepProps) => {
     return (
         <>
             <div>

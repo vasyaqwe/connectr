@@ -1,4 +1,4 @@
-import { CurrentStep } from "@/types"
+import { MultiStepFormStep } from "@/types"
 import { useEffect, useState } from "react"
 import { ZodIssueBase } from "zod"
 import * as z from "zod"
@@ -14,7 +14,7 @@ export const useFormValidation = <TFormData,>({
     onSubmit: () => void
     formData: TFormData
     zodSchema: z.Schema<TFormData>
-    currentStep?: CurrentStep
+    currentStep?: MultiStepFormStep
 }) => {
     const [errors, setErrors] = useState<ValidationErrors>({})
     const [showErrors, setShowErrors] = useState(false)

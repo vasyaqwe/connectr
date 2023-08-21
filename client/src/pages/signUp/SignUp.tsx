@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { ChangeEvent, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { useQueryClient, useMutation } from "@tanstack/react-query"
 import { useErrorToast } from "@/hooks/useErrorToast"
@@ -8,18 +8,31 @@ import { useStore } from "@/stores/useStore"
 import { EmailStep } from "./EmailStep"
 import logo from "@/assets/logo.svg"
 import { UsernameStep } from "./UsernameStep"
-import { StepName, useSignUpStore } from "@/stores/useSignUpStore"
 import { PasswordStep } from "./PasswordStep"
 import useMeasure from "react-use-measure"
 import { AnimatePresence, motion } from "framer-motion"
 import { InfoStep } from "./InfoStep"
 import { useAuthStore } from "@/stores/useAuthStore"
 import { signUpSchema } from "@/lib/validations/signUp"
+import { useMultiStepForm } from "@/hooks/useMultiStepForm"
 
 export const SignUp = () => {
     const { openToast } = useStore()
     const { setToken } = useAuthStore()
-    const { onNext, formData, currentStep } = useSignUpStore()
+    const [formData, setFormData] = useState({
+        fullName: "",
+        email: "",
+        username: "",
+        password: "",
+        location: "",
+        bio: "",
+        confirmPassword: "",
+    })
+
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target
+        setFormData((prev) => ({ ...prev, [name]: value }))
+    }
 
     const queryClient = useQueryClient()
     const navigate = useNavigate()
@@ -38,7 +51,11 @@ export const SignUp = () => {
                 email: formData.email,
                 username: formData.username,
                 password: formData.password,
-                location: formData.location,
+                location:
+                    formData.location.length > 0
+                        ? formData.location
+                        : undefined,
+                bio: formData.bio.length > 0 ? formData.bio : undefined,
             }),
         {
             onSuccess: ({ accessToken }) => {
@@ -72,35 +89,45 @@ export const SignUp = () => {
         },
     })
 
-    const onSubmitLookup: Record<StepName, () => void> = {
-        emailStep: onCheckEmail,
-        usernameStep: onCheckUsername,
-        infoStep: onNext,
-        passwordStep: onSubmit,
-    }
+    const steps = [
+        {
+            name: "emailStep" as const,
+            requiredFields: ["email"],
+            isLoading: checkEmailLoading,
+            onSubmit: onCheckEmail,
+            component: EmailStep,
+        },
+        {
+            name: "usernameStep" as const,
+            requiredFields: ["username"],
+            isLoading: checkUsernameLoading,
+            onSubmit: onCheckUsername,
+            component: UsernameStep,
+        },
+        {
+            name: "infoStep" as const,
+            requiredFields: ["fullName", "bio"],
+            component: InfoStep,
+        },
+        {
+            name: "passwordStep" as const,
+            requiredFields: ["password", "confirmPassword"],
+            onSubmit,
+            isLoading,
+            component: PasswordStep,
+        },
+    ].map((s, idx) => ({ ...s, idx }))
+
+    type StepName = (typeof steps)[number]["name"]
+
+    const { onNext, currentStep, onBack } = useMultiStepForm<StepName>(steps)
 
     const { safeOnSubmit, errors } = useFormValidation({
-        onSubmit: onSubmitLookup[currentStep.name],
+        onSubmit: steps[currentStep.idx]?.onSubmit ?? onNext,
         formData,
         zodSchema: signUpSchema,
         currentStep,
     })
-
-    const steps = [
-        <EmailStep
-            isLoading={checkEmailLoading}
-            errors={errors}
-        />,
-        <UsernameStep
-            isLoading={checkUsernameLoading}
-            errors={errors}
-        />,
-        <InfoStep errors={errors} />,
-        <PasswordStep
-            isLoading={isLoading}
-            errors={errors}
-        />,
-    ]
 
     useErrorToast(error)
     useErrorToast(checkEmailError)
@@ -141,7 +168,14 @@ export const SignUp = () => {
                             className="flex flex-col gap-5 "
                         >
                             <div className="flex flex-col gap-2">
-                                {steps[currentStep.idx]}
+                                {steps[currentStep.idx]?.component({
+                                    isLoading:
+                                        steps[currentStep.idx]?.isLoading,
+                                    onBack: onBack,
+                                    onChange: onChange,
+                                    formData: formData,
+                                    errors: errors,
+                                })}
                             </div>
 
                             <p className="text-neutral-800 text-center">

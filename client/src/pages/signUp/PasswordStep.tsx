@@ -1,11 +1,14 @@
 import { SignUpStepProps } from "@/types"
 import { Button } from "@/components/ui/Button"
 import { Input } from "@/components/ui/Input"
-import { useSignUpStore } from "@/stores/useSignUpStore"
 
-export const PasswordStep = ({ errors, isLoading }: SignUpStepProps) => {
-    const { onChange, formData, onBack } = useSignUpStore()
-
+export const PasswordStep = ({
+    errors,
+    isLoading,
+    onChange,
+    formData,
+    onBack,
+}: SignUpStepProps) => {
     return (
         <>
             <div>
@@ -16,6 +19,7 @@ export const PasswordStep = ({ errors, isLoading }: SignUpStepProps) => {
                     Password
                 </label>
                 <Input
+                    autoFocus
                     invalid={errors.password}
                     placeholder="Choose a secure password"
                     value={formData.password}
