@@ -49,7 +49,7 @@ const Home = () => {
         if (entry?.isIntersecting && hasNextPage) fetchNextPage()
     }, [entry, hasNextPage, fetchNextPage])
 
-    const posts = data?.pages.flatMap((page) => page.posts)
+    const posts = data?.pages.flatMap((page) => page.posts) ?? []
 
     return (
         <div className="grid gap-4 lg:grid-cols-[40%,1fr] md:gap-10 xl:grid-cols-[30%,1fr,15%] items-start">
@@ -67,8 +67,12 @@ const Home = () => {
                             <PostSkeleton />
                             <PostSkeleton />
                         </>
+                    ) : posts.length < 1 ? (
+                        <p className="mt-8 mx-4 text-lg font-semibold">
+                            Be the first to post something.
+                        </p>
                     ) : (
-                        posts?.map((post: PostType, idx) => {
+                        posts.map((post: PostType, idx) => {
                             if (posts.length === idx + 1) {
                                 return (
                                     <Post

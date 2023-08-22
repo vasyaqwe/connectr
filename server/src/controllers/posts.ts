@@ -14,6 +14,7 @@ export const getPosts = async (req: Request, res: Response) => {
         .sort({ createdAt: -1 })
         .populate({
             path: "user",
+            select: "-password",
         })
 
     // Getting the numbers of products stored in database
@@ -47,7 +48,10 @@ export const getPost = async (req: Request, res: Response) => {
         return
     }
 
-    const post = await Post.findById(id).populate("user")
+    const post = await Post.findById(id).populate({
+        path: "user",
+        select: "-password",
+    })
 
     if (!post) {
         res.status(400).json({ message: "No post found!" })
@@ -122,7 +126,7 @@ export const deletePost = async (req: Request, res: Response) => {
 
     const deletedPost = await Post.findByIdAndDelete(id)
 
-    if (deletedPost && post.hasOwnProperty("image") && post.image) {
+    if (deletedPost && post.image) {
         await cloudinary.uploader.destroy(post.image.filename)
     }
 

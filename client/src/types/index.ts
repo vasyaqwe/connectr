@@ -27,13 +27,8 @@ export type User = RawUser & {
 
 export type UserFormData = RawUser & { confirmPassword: string }
 
-export type PostFormData = {
-    image?: undefined | File
-    body: string
-}
-
 export type RawPost = {
-    image?: { path: string; filename: string }
+    image?: undefined | File
     body: string
 }
 
@@ -44,6 +39,7 @@ export type Post = RawPost & {
     likes: string[]
     createdAt: Date
     updatedAt: Date
+    image?: { path: string; filename: string }
 }
 
 export type RawComment = {

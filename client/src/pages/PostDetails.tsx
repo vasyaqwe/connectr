@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query"
 import { ProfileCard } from "@/components/ProfileCard"
 import { getPost } from "@/api/posts"
-import { Post } from "@/components/postDetail/Post"
+import { Post } from "@/components/postDetails/Post"
 import { Link, Navigate, useParams } from "react-router-dom"
 import arrow from "@/assets/arrow.svg"
 import { PostSkeleton } from "@/components/Post"

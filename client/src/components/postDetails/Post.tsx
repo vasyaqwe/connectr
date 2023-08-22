@@ -105,7 +105,7 @@ export const Post = forwardRef<HTMLDivElement, { post: PostType }>(
         useErrorToast(connectError)
 
         return (
-            <div
+            <article
                 ref={ref}
                 className="card md:max-w-full"
             >
@@ -120,7 +120,7 @@ export const Post = forwardRef<HTMLDivElement, { post: PostType }>(
                 />
                 <NewPostComment post={post} />
                 {post.comments.length > 0 && <PostCommentsModule post={post} />}
-            </div>
+            </article>
         )
     }
 )

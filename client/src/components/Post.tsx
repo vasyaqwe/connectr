@@ -15,7 +15,7 @@ import { LikeButton } from "./ui/LikeButton"
 import { Skeleton } from "./ui/Skeleton"
 import { Tooltip } from "./ui/Tooltip"
 import { useLocation, useNavigate } from "react-router-dom"
-import { NewPostCommentSkeleton } from "./postDetail/NewPostComment"
+import { NewPostCommentSkeleton } from "./postDetails/NewPostComment"
 import { DropdownMenu, DropdownMenuOptions } from "./ui/DropdownMenu"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { deletePost } from "@/api/posts"
@@ -188,13 +188,19 @@ const PostHeader = ({
 const PostBody = ({ post }: { post: Post }) => {
     return (
         <>
+            <p
+                className="w-fit cursor-text"
+                onClick={(e) => e.stopPropagation()}
+            >
+                {post.body}
+            </p>
             {post.image && (
                 <img
+                    className="self-start rounded-md"
                     src={post.image.path}
                     alt={post.body}
                 />
             )}
-            <p onClick={(e) => e.stopPropagation()}>{post.body}</p>
         </>
     )
 }

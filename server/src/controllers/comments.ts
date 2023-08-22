@@ -18,7 +18,6 @@ export const getPostComments = async (req: Request, res: Response) => {
         path: "comments",
         populate: {
             path: "user",
-            model: "User",
             select: "-password",
         },
         options: { sort: { createdAt: -1 } },

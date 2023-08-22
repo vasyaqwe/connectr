@@ -8,13 +8,13 @@ import { useQueryClient, useMutation } from "@tanstack/react-query"
 import { useRef, useState } from "react"
 import { createPost } from "@/api/posts"
 import { useStore } from "@/stores/useStore"
-import { PostFormData } from "@/types"
+import { RawPost } from "@/types"
 import { AnimatePresence, motion } from "framer-motion"
 
 export const NewPost = () => {
     const { openToast } = useStore()
 
-    const [formData, setFormData] = useState<PostFormData>({
+    const [formData, setFormData] = useState<RawPost>({
         body: "",
         image: undefined,
     })
@@ -27,10 +27,11 @@ export const NewPost = () => {
         error,
         mutate: onSubmit,
     } = useMutation(
-        () =>
-            createPost({
-                post: { body: postRef?.current?.value ?? "" },
-            }),
+        () => {
+            return createPost({
+                post: formData,
+            })
+        },
         {
             onSuccess: () => {
                 if (postRef.current) {

@@ -10,7 +10,11 @@ export const getPost = async (id: string): Promise<Post> =>
     axiosRequest(() => axiosPrivate.get(`/posts/${id}`))
 
 export const createPost = async ({ post }: { post: RawPost }) =>
-    axiosRequest(() => axiosPrivate.post(`/posts/`, post))
+    axiosRequest(() =>
+        axiosPrivate.post(`/posts/`, post, {
+            headers: { "Content-Type": "multipart/form-data" },
+        })
+    )
 
 export const likePost = async (id: string) =>
     axiosRequest(() => axiosPrivate.patch(`/posts/${id}`))
