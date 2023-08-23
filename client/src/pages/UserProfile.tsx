@@ -1,4 +1,8 @@
-import { useInfiniteQuery } from "@tanstack/react-query"
+import {
+    useInfiniteQuery,
+    useQuery,
+    useQueryClient,
+} from "@tanstack/react-query"
 import { useEffect, useRef } from "react"
 import { useIntersection } from "@mantine/hooks"
 import { ProfileCard } from "@/components/ProfileCard"
@@ -9,12 +13,34 @@ import { PostSkeleton } from "@/components/Post"
 import { Post } from "@/components/home/Post"
 import { safeError } from "@/lib/utils"
 import { useNavigate, useParams } from "react-router-dom"
-import { getUserPosts } from "@/api/users"
+import { getUserPosts, viewUserProfile } from "@/api/users"
 import arrow from "@/assets/arrow.svg"
+import { useAuth } from "@/hooks/useAuth"
 
 export const UserProfile = () => {
+    const user = useAuth()
     const { id } = useParams()
+
     const navigate = useNavigate()
+    const queryClient = useQueryClient()
+
+    useQuery(["users", id], () => viewUserProfile(id!), {
+        onSuccess: () => {
+            queryClient.invalidateQueries(["users", id])
+        },
+        refetchOnWindowFocus: false,
+        retry: false,
+    })
+
+    useEffect(() => {
+        const viewProfile = async () => {
+            await viewUserProfile(id!)
+        }
+        if (user?._id !== id) {
+            viewProfile()
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const lastPostRef = useRef<HTMLDivElement>(null)
 

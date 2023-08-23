@@ -79,7 +79,7 @@ export const googleLogin = async (req: Request, res: Response) => {
         })
 
         if (duplicate) {
-            res.status(409).json({ message: "User already exists!" })
+            res.status(409).json({ message: "Email already exists!" })
             return
         }
 

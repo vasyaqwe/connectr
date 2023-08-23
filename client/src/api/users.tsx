@@ -14,6 +14,9 @@ export const checkUsername = async ({ username }: { username: string }) =>
 export const toggleConnect = async (id: string, connectionId: string) =>
     axiosRequest(() => axiosPrivate.patch(`/users/${id}/${connectionId}`))
 
+export const viewUserProfile = async (id: string) =>
+    axiosRequest(() => axiosPrivate.patch(`/users/${id}`))
+
 export const getUser = async (id: string) =>
     axiosRequest(() => axiosPrivate.get(`/users/${id}`))
 

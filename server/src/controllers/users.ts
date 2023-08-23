@@ -56,25 +56,6 @@ export const getUser = async (req: Request, res: Response) => {
     res.json(user)
 }
 
-export const getUserConnections = async (req: Request, res: Response) => {
-    const { id } = req.params
-    const user = await User.findById(id)
-
-    if (!id || !Types.ObjectId.isValid(id)) {
-        res.status(400).json({ message: "Invalid user id" })
-        return
-    }
-
-    if (!user) {
-        res.status(400).json({ message: "No user found!" })
-        return
-    }
-
-    const connections = user.populate("connections")
-
-    res.json(connections)
-}
-
 export const toggleConnect = async (req: Request, res: Response) => {
     const { user1Id, user2Id } = req.params
 
@@ -127,6 +108,30 @@ export const toggleConnect = async (req: Request, res: Response) => {
     await user2.save()
 
     res.json(user1.populate("connections"))
+}
+
+export const viewUserProfile = async (req: Request, res: Response) => {
+    const { id } = req.params
+
+    if (!id || !Types.ObjectId.isValid(id)) {
+        res.status(400).json({ message: "Invalid user id" })
+        return
+    }
+
+    const user = await User.findById(id)
+
+    if (!user) {
+        res.status(400).json({
+            message: "User not found",
+        })
+        return
+    }
+
+    if (req.user.toString() !== user._id.toString()) {
+        user.profileViews += 1
+        await user.save()
+        res.json({ message: "Profile views incremented" })
+    }
 }
 
 export const getUserPosts = async (req: Request, res: Response) => {

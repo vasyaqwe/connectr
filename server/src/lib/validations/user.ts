@@ -20,5 +20,5 @@ export const userSchema = z.object({
     location: z.string().nonempty().optional(),
     profileImageUrl: z.string().optional(),
     bio: z.string().min(10).optional(),
-    profileViews: z.number().optional(),
+    profileViews: z.number().default(0),
 })
