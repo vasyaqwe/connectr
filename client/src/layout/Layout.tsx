@@ -21,7 +21,7 @@ export const Layout = () => {
         <>
             {user && <Header />}
             <main className="container mx-auto mt-8 sm:mt-12">
-                <p className="fixed p-2 text-sm -translate-x-1/2 border rounded-md bg-secondary-100 border-secondary-400 bottom-4 left-1/2">
+                <p className="fixed z-[999] w-max text-center p-2 text-xs sm:text-sm -translate-x-1/2 border rounded-md bg-secondary-100 border-secondary-400 bottom-4 left-1/2">
                     Created by{" "}
                     <Link
                         className="link"

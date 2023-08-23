@@ -209,7 +209,7 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
         return (
             <div
                 ref={ref}
-                className="max-w-full gap-4 p-3 shadow-none card rounded-xl lg:p-5 from-white to-white"
+                className="max-w-full gap-4 p-3 shadow-none card rounded-xl md:p-5 from-white to-white"
             >
                 <header className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
@@ -223,14 +223,14 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
                             <p className="font-bold leading-5">
                                 <Link
                                     to={`/users/${comment.user._id}`}
-                                    className="hidden lg:inline-block hover:underline"
+                                    className="hidden sm:inline-block hover:underline"
                                 >
                                     {comment.user.fullName}
                                 </Link>
-                                <DotSeparator className="mr-1" />
+                                <DotSeparator className="hidden mr-1 sm:inline-block" />
                                 <Link
                                     to={`/users/${comment.user._id}`}
-                                    className="text-sm lg:text-neutral-800 lg:font-light hover:underline"
+                                    className="text-sm sm:text-neutral-800 sm:font-light hover:underline"
                                 >
                                     @{comment.user.username}
                                 </Link>

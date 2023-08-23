@@ -144,15 +144,15 @@ const PostHeader = ({
                         <Link
                             onClick={(e) => e.stopPropagation()}
                             to={`/users/${post.user._id}`}
-                            className="hidden lg:inline-block hover:underline"
+                            className="hidden sm:inline-block hover:underline"
                         >
                             {post.user.fullName}
                         </Link>
-                        <DotSeparator className="mr-1" />
+                        <DotSeparator className="hidden mr-1 sm:inline-block" />
                         <Link
                             onClick={(e) => e.stopPropagation()}
                             to={`/users/${post.user._id}`}
-                            className="font-light lg:text-neutral-800 hover:underline"
+                            className="font-light sm:text-neutral-800 hover:underline"
                         >
                             @{post.user.username}
                         </Link>

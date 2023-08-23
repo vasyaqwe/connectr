@@ -134,7 +134,7 @@ export const SignUp = () => {
     useErrorToast(checkUsernameError)
 
     return (
-        <div className="min-h-screen px-4 pt-16 md:pt-28 ">
+        <div className="min-h-screen px-4 pt-8 md:pt-28 ">
             <div className="flex items-center justify-center gap-4 mb-8">
                 <img
                     src={logo}

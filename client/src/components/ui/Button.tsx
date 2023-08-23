@@ -1,6 +1,6 @@
 import { ComponentPropsWithRef, forwardRef } from "react"
 import { Spinner } from "./Spinner"
-import arrowIcon from "@/assets/arrow.svg"
+import arrowIcon from "@/assets/arrowWhite.svg"
 import { cn } from "@/lib/utils"
 
 const variantLookup = {
