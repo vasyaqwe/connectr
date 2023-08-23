@@ -10,12 +10,10 @@ import { useAuthStore } from "@/stores/useAuthStore"
 import { Checkbox } from "@/components/ui/Checkbox"
 import { Input } from "@/components/ui/Input"
 import { GoogleLoginButton } from "@/components/ui/GoogleLoginButton"
-import { useStore } from "@/stores/useStore"
 import { authSchema } from "@/lib/validations/auth"
 
 export const Login = () => {
     const queryClient = useQueryClient()
-    const { openToast } = useStore()
     const { setToken, setPersist, persist } = useAuthStore()
 
     const [formData, setFormData] = useState({
@@ -34,8 +32,6 @@ export const Login = () => {
             queryClient.invalidateQueries(["auth"])
             setToken(accessToken)
             navigate("/")
-            openToast({ text: "Sign up successful, welcome!" })
-            setFormData({ email: "", password: "" })
         },
     })
 

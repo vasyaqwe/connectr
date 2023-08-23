@@ -20,8 +20,8 @@ router.post("/check-username", checkUsername)
 
 router.get("/:id", isLoggedIn, getUser)
 
-router.get("/:id/posts", getUserPosts)
-router.get("/:id/suggestions", getUserSuggestions)
+router.get("/:id/posts", isLoggedIn, getUserPosts)
+router.get("/:id/suggestions", isLoggedIn, getUserSuggestions)
 
 router.patch("/:id", isLoggedIn, viewUserProfile)
 
