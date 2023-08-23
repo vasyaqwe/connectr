@@ -111,8 +111,8 @@ export const deletePost = async (req: Request, res: Response) => {
 
     const deletedPost = await Post.findByIdAndDelete(id)
 
-    if (deletedPost && post.image) {
-        await cloudinary.uploader.destroy(post.image.filename)
+    if (deletedPost && deletedPost.image && "image" in deletedPost.toObject()) {
+        await cloudinary.uploader.destroy(deletedPost.image.filename)
     }
 
     res.json({ message: `Post ${post!._id} was deleted!` })
