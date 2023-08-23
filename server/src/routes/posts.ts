@@ -6,7 +6,6 @@ import {
     createPost,
     likePost,
     deletePost,
-    getUserPosts,
 } from "../controllers/posts"
 import { isLoggedIn, zParse } from "../middleware"
 import { upload } from "../cloudinary"
@@ -20,7 +19,5 @@ router
     .post(upload.single("image"), zParse(postSchema), createPost)
 
 router.route("/:id").get(getPost).patch(likePost).delete(deletePost)
-
-router.get("/:userId/posts", zParse(postSchema), getUserPosts)
 
 export default router

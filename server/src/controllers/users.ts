@@ -3,10 +3,12 @@ import bcrypt from "bcrypt"
 import { Request, Response } from "express"
 import { Types } from "mongoose"
 import {
+    POSTS_LIMIT,
     cookieConfig,
     generateAccessToken,
     generateRefreshToken,
 } from "../lib/utils"
+import { Post } from "../models/Post"
 
 export const checkEmail = async (req: Request, res: Response) => {
     const { email } = req.body
@@ -125,6 +127,35 @@ export const toggleConnect = async (req: Request, res: Response) => {
     await user2.save()
 
     res.json(user1.populate("connections"))
+}
+
+export const getUserPosts = async (req: Request, res: Response) => {
+    const { id } = req.params
+
+    if (!id || !Types.ObjectId.isValid(id)) {
+        res.status(400).json({ message: "Invalid user id" })
+        return
+    }
+
+    const page = req.query.page || 1
+
+    const posts = await Post.find({ user: id })
+        .limit(POSTS_LIMIT * 1)
+        .skip((+page - 1) * POSTS_LIMIT)
+        .sort({ createdAt: -1 })
+        .populate({
+            path: "user",
+            select: "-password",
+        })
+
+    // Getting the numbers of products stored in database
+    const count = await Post.countDocuments()
+
+    res.json({
+        posts,
+        totalPages: Math.ceil(count / POSTS_LIMIT),
+        currentPage: page,
+    })
 }
 
 export const createUser = async (req: Request, res: Response) => {

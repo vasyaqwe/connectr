@@ -14,7 +14,7 @@ import { DotSeparator } from "./ui/DotSeparator"
 import { LikeButton } from "./ui/LikeButton"
 import { Skeleton } from "./ui/Skeleton"
 import { Tooltip } from "./ui/Tooltip"
-import { useLocation, useNavigate } from "react-router-dom"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { NewPostCommentSkeleton } from "./postDetails/NewPostComment"
 import { DropdownMenu, DropdownMenuOptions } from "./ui/DropdownMenu"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
@@ -130,19 +130,32 @@ const PostHeader = ({
     return (
         <header className="flex items-center gap-2 justify-between">
             <div className="flex items-center gap-2">
-                <Avatar
-                    src={post.user.profileImageUrl}
-                    alt={post.user.fullName}
-                />
+                <Link
+                    onClick={(e) => e.stopPropagation()}
+                    to={`/users/${post.user._id}`}
+                >
+                    <Avatar
+                        src={post.user.profileImageUrl}
+                        alt={post.user.fullName}
+                    />
+                </Link>
                 <div>
                     <p className="font-bold leading-5">
-                        <span className="hidden lg:inline-block">
+                        <Link
+                            onClick={(e) => e.stopPropagation()}
+                            to={`/users/${post.user._id}`}
+                            className="hidden lg:inline-block hover:underline"
+                        >
                             {post.user.fullName}
-                            <DotSeparator className="mr-1" />
-                        </span>
-                        <span className="lg:text-neutral-800 font-light">
+                        </Link>
+                        <DotSeparator className="mr-1" />
+                        <Link
+                            onClick={(e) => e.stopPropagation()}
+                            to={`/users/${post.user._id}`}
+                            className="lg:text-neutral-800 font-light  hover:underline"
+                        >
                             @{post.user.username}
-                        </span>
+                        </Link>
                     </p>{" "}
                     <p className="text-neutral-800 text-sm">
                         {formatRelativeDate(post.createdAt)}{" "}

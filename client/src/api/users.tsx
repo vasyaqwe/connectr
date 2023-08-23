@@ -17,5 +17,13 @@ export const toggleConnect = async (id: string, connectionId: string) =>
 export const getUser = async (id: string) =>
     axiosRequest(() => axiosPrivate.get(`/users/${id}`))
 
+export const getUserPosts = async ({
+    page,
+    id,
+}: {
+    page: number
+    id: string
+}) => axiosRequest(() => axiosPrivate.get(`/users/${id}/posts?page=${page}`))
+
 export const createUser = async (user: RawUser) =>
     axiosRequest(() => axiosPrivate.post(`/users`, user))

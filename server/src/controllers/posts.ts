@@ -2,15 +2,14 @@ import { Post } from "../models/Post"
 import { Request, Response } from "express"
 import { Types } from "mongoose"
 import { cloudinary } from "../cloudinary"
-
-const LIMIT = 2
+import { POSTS_LIMIT } from "../lib/utils"
 
 export const getPosts = async (req: Request, res: Response) => {
     const page = req.query.page || 1
 
     const posts = await Post.find()
-        .limit(LIMIT * 1)
-        .skip((+page - 1) * LIMIT)
+        .limit(POSTS_LIMIT * 1)
+        .skip((+page - 1) * POSTS_LIMIT)
         .sort({ createdAt: -1 })
         .populate({
             path: "user",
@@ -22,24 +21,10 @@ export const getPosts = async (req: Request, res: Response) => {
 
     res.json({
         posts,
-        totalPages: Math.ceil(count / LIMIT),
+        totalPages: Math.ceil(count / POSTS_LIMIT),
         currentPage: page,
     })
 }
-
-export const getUserPosts = async (req: Request, res: Response) => {
-    const { userId } = req.params
-
-    if (!userId || !Types.ObjectId.isValid(userId)) {
-        res.status(400).json({ message: "Invalid user id" })
-        return
-    }
-
-    const posts = await Post.find({ user: userId })
-
-    res.json(posts)
-}
-
 export const getPost = async (req: Request, res: Response) => {
     const { id } = req.params
 

@@ -6,6 +6,7 @@ import { Layout } from "./layout/Layout"
 import { Login } from "./pages/Login"
 import { SignUp } from "./pages/signUp/SignUp"
 import { PostDetails } from "./pages/PostDetails"
+import { UserProfile } from "./pages/UserProfile"
 
 function App() {
     return (
@@ -32,6 +33,10 @@ function App() {
                         <Route
                             path="/posts/:id"
                             element={<PostDetails />}
+                        />
+                        <Route
+                            path="/users/:id"
+                            element={<UserProfile />}
                         />
                     </Route>
                 </Route>

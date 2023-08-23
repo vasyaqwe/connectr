@@ -32,7 +32,7 @@ export const PostDetails = () => {
             <ProfileCard userId={user._id} />
             <div className="pb-8 grid gap-3">
                 <Link
-                    to={".."}
+                    to={"/"}
                     className="link w-fit flex items-center gap-1"
                 >
                     <img

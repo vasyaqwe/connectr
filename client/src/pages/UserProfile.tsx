@@ -2,18 +2,19 @@ import { useInfiniteQuery } from "@tanstack/react-query"
 import { useEffect, useRef } from "react"
 import { useIntersection } from "@mantine/hooks"
 import { ProfileCard } from "@/components/ProfileCard"
-import { getPosts } from "@/api/posts"
 import { ErrorMessage } from "@/components/ui/ErrorMessage"
 import { Spinner } from "@/components/ui/Spinner"
-import { DecodedToken, Post as PostType } from "@/types"
+import { Post as PostType } from "@/types"
 import { PostSkeleton } from "@/components/Post"
 import { Post } from "@/components/home/Post"
-import { NewPost } from "@/components/home/NewPost"
 import { safeError } from "@/lib/utils"
-import { useAuth } from "@/hooks/useAuth"
+import { useNavigate, useParams } from "react-router-dom"
+import { getUserPosts } from "@/api/users"
+import arrow from "@/assets/arrow.svg"
 
-export const Home = () => {
-    const user = useAuth() as DecodedToken
+export const UserProfile = () => {
+    const { id } = useParams()
+    const navigate = useNavigate()
 
     const lastPostRef = useRef<HTMLDivElement>(null)
 
@@ -31,7 +32,7 @@ export const Home = () => {
         fetchNextPage,
     } = useInfiniteQuery(
         ["posts"],
-        ({ pageParam = 1 }) => getPosts(pageParam),
+        ({ pageParam = 1 }) => getUserPosts({ page: pageParam, id: id! }),
         {
             getNextPageParam: (res, pages) => {
                 if (pages.length < res.totalPages) {
@@ -53,12 +54,23 @@ export const Home = () => {
 
     return (
         <div className="grid gap-4 lg:grid-cols-[40%,1fr] md:gap-10 xl:grid-cols-[30%,1fr,15%] items-start">
-            <ProfileCard userId={user._id} />
+            <ProfileCard userId={id!} />
             {error ? (
                 <ErrorMessage message={safeError(error)} />
             ) : (
                 <div className="pb-8 flex flex-col gap-3">
-                    <NewPost />
+                    <button
+                        role="link"
+                        onClick={() => navigate(-1)}
+                        className="link w-fit flex items-center gap-1"
+                    >
+                        <img
+                            className="rotate-180"
+                            src={arrow}
+                            alt="back"
+                        />
+                        Back
+                    </button>
                     {isLoading ? (
                         <>
                             <PostSkeleton />

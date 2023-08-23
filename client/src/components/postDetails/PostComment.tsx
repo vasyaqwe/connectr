@@ -27,6 +27,7 @@ import { useErrorToast } from "@/hooks/useErrorToast"
 import { useStore } from "@/stores/useStore"
 import { DropdownMenu, DropdownMenuOptions } from "../ui/DropdownMenu"
 import { toggleConnect } from "@/api/users"
+import { Link } from "react-router-dom"
 
 type PostCommentProps = {
     comment: Comment
@@ -203,19 +204,27 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
             >
                 <header className="flex items-center gap-2 justify-between">
                     <div className="flex items-center gap-2">
-                        <Avatar
-                            src={comment.user.profileImageUrl}
-                            alt={comment.user.fullName}
-                        />
+                        <Link to={`/users/${comment.user._id}`}>
+                            <Avatar
+                                src={comment.user.profileImageUrl}
+                                alt={comment.user.fullName}
+                            />
+                        </Link>
                         <div>
                             <p className="font-bold leading-5">
-                                <span className="hidden lg:inline-block">
+                                <Link
+                                    to={`/users/${comment.user._id}`}
+                                    className="hidden lg:inline-block hover:underline"
+                                >
                                     {comment.user.fullName}
-                                    <DotSeparator className="mr-1" />
-                                </span>
-                                <span className="lg:text-neutral-800 lg:font-light text-sm">
+                                </Link>
+                                <DotSeparator className="mr-1" />
+                                <Link
+                                    to={`/users/${comment.user._id}`}
+                                    className="lg:text-neutral-800 lg:font-light text-sm hover:underline"
+                                >
                                     @{comment.user.username}
-                                </span>
+                                </Link>
                             </p>{" "}
                             <p className="text-neutral-800 text-sm">
                                 {formatRelativeDate(comment.createdAt)}{" "}

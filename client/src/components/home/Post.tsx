@@ -125,7 +125,10 @@ export const Post = forwardRef<HTMLElement, { post: PostType }>(
 
         return (
             <article
-                onClick={() => navigate(`/posts/${post._id}`)}
+                onClick={(e) => {
+                    e.preventDefault()
+                    navigate(`/posts/${post._id}`)
+                }}
                 ref={ref}
                 className="card md:max-w-full cursor-pointer"
             >

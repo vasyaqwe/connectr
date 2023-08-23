@@ -45,3 +45,5 @@ export const generateRefreshToken = (user: UserType & Document) => {
         expiresIn: refreshTokenExpiresIn,
     })
 }
+
+export const POSTS_LIMIT = 2
