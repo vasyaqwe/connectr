@@ -60,7 +60,8 @@ export const Post = forwardRef<HTMLDivElement, { post: PostType }>(
         )
 
         const { error: connectError, mutate: onToggleConnect } = useMutation(
-            () => toggleConnect(user._id, post.user._id),
+            (postUserId: string) =>
+                toggleConnect({ userId: user._id, connectionId: postUserId }),
             {
                 onMutate: async () => {
                     // Stop the queries that may affect this operation

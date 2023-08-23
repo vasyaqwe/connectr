@@ -104,9 +104,13 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
         )
 
         const { error: connectError, mutate: onToggleConnect } = useMutation(
-            () => toggleConnect(user._id, comment.user._id),
+            (commentUserId: string) =>
+                toggleConnect({
+                    userId: user._id,
+                    connectionId: commentUserId,
+                }),
             {
-                onMutate: async () => {
+                onMutate: async (commentUserId) => {
                     // Stop the queries that may affect this operation
                     await queryClient.cancelQueries(queryKey)
 
@@ -124,10 +128,15 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
 
                                 return {
                                     ...paginatedComment,
-                                    user: {
-                                        ...paginatedComment.user,
-                                        connections: updatedConnections,
-                                    },
+                                    user:
+                                        paginatedComment.user._id ===
+                                        commentUserId
+                                            ? {
+                                                  ...paginatedComment.user,
+                                                  connections:
+                                                      updatedConnections,
+                                              }
+                                            : paginatedComment.user,
                                 }
                             }),
                         }))
@@ -244,7 +253,7 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
                                 variant={isConnected ? "iconActive" : "icon"}
                                 onClick={(e) => {
                                     e.preventDefault()
-                                    onToggleConnect()
+                                    onToggleConnect(comment.user._id)
                                 }}
                             >
                                 {isConnected ? (

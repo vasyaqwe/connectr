@@ -71,9 +71,11 @@ export const Post = forwardRef<HTMLElement, { post: PostType }>(
         )
 
         const { error: connectError, mutate: onToggleConnect } = useMutation(
-            () => toggleConnect(user._id, post.user._id),
+            (postUserId: string) =>
+                toggleConnect({ userId: user._id, connectionId: postUserId }),
             {
-                onMutate: async () => {
+                onMutate: async (postUserId) => {
+                    console.log(postUserId)
                     // Stop the queries that may affect this operation
                     await queryClient.cancelQueries(queryKey)
 
@@ -86,12 +88,16 @@ export const Post = forwardRef<HTMLElement, { post: PostType }>(
                             const updatedConnections =
                                 optimisticallyUpdatedConnections(paginatedPost)
 
+                            //update user connections on paginated post, just the post that was clicked
                             return {
                                 ...paginatedPost,
-                                user: {
-                                    ...paginatedPost.user,
-                                    connections: updatedConnections,
-                                },
+                                user:
+                                    paginatedPost.user._id === postUserId
+                                        ? {
+                                              ...paginatedPost.user,
+                                              connections: updatedConnections,
+                                          }
+                                        : paginatedPost.user,
                             }
                         }),
                     }))

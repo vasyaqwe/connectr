@@ -83,7 +83,7 @@ const PostHeader = ({
     onToggleConnect,
 }: {
     post: Post
-    onToggleConnect: () => void
+    onToggleConnect: (postUserId: string) => void
 }) => {
     const user = useAuth() as DecodedToken
 
@@ -175,7 +175,7 @@ const PostHeader = ({
                         variant={isConnected ? "iconActive" : "icon"}
                         onClick={(e) => {
                             e.stopPropagation()
-                            onToggleConnect()
+                            onToggleConnect(post.user._id)
                         }}
                     >
                         {isConnected ? (

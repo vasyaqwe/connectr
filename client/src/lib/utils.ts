@@ -71,7 +71,7 @@ export const optimisticallyUpdatedConnections = (data: Comment) => {
 
     if (accessToken) {
         const user: DecodedToken = jwtDecode(accessToken)
-
+        console.log(data)
         const connected = data.user.connections.includes(user._id)
 
         const updatedConnections = connected
