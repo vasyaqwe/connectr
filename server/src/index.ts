@@ -43,3 +43,5 @@ app.all("*", (_req, res, _next) => {
 })
 
 app.listen(3000, () => console.log(`LISTENING ON PORT 3000!`))
+
+export default app
