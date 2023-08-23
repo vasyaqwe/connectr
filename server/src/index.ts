@@ -18,7 +18,7 @@ const app = express()
 connectDB()
 
 const corsOptions = {
-    origin: ["http://localhost:5173", "https://connectr-vasyaqwe.netlify.app"],
+    origin: ["http://localhost:5173", "https://connectr-vasyaqwe.onrender.com"],
     credentials: true,
 }
 app.use(cors(corsOptions))

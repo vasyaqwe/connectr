@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios"
 export const API_URL =
     import.meta.env.MODE === "development"
         ? "http://localhost:3000"
-        : "https://connectr-vasyaqwe.onrender.com"
+        : "https://connectr-vasyaqwe-api.onrender.com"
 
 import { useAuthStore } from "@/stores/useAuthStore"
 import { refresh } from "./auth"
