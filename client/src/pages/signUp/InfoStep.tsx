@@ -61,7 +61,7 @@ export const InfoStep = ({
                     type="text"
                 />
             </div>
-            <div className="flex flex-col gap-3 mt-3 items-center">
+            <div className="flex flex-col items-center gap-3 mt-3">
                 <Button
                     className={`justify-center w-full`}
                     arrow={"next"}

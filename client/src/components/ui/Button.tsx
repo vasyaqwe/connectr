@@ -61,9 +61,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 <span className="relative flex h-[21px] items-center gap-2">
                     {arrow === "back" && (
                         <img
-                            className="rotate-180 absolute top-1/2 -translate-y-1/2  
-                         -left-4 group-hover:-left-6
-                        transition-all opacity-0 group-hover:opacity-100"
+                            className="absolute transition-all rotate-180 -translate-y-1/2 opacity-0 top-1/2 -left-4 group-hover:-left-6 group-hover:opacity-100"
                             src={arrowIcon}
                             alt="arrow forwards"
                         />
@@ -71,9 +69,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                     {children}
                     {arrow === "next" && (
                         <img
-                            className="absolute top-1/2  -translate-y-1/2
-                  -right-4 group-hover:-right-6
-                         transition-all opacity-0 group-hover:opacity-100"
+                            className="absolute transition-all -translate-y-1/2 opacity-0 top-1/2 -right-4 group-hover:-right-6 group-hover:opacity-100"
                             src={arrowIcon}
                             alt="arrow forwards"
                         />

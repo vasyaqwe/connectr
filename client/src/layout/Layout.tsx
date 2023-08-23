@@ -20,7 +20,7 @@ export const Layout = () => {
     return (
         <>
             {user && <Header />}
-            <main className="mt-8 container mx-auto sm:mt-12">
+            <main className="container mx-auto mt-8 sm:mt-12">
                 <Toast />
                 <Outlet />
             </main>

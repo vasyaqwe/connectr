@@ -28,7 +28,7 @@ const PostSkeleton = () => {
     const isOnPostDetailPage = pathname.includes("posts")
 
     return (
-        <Skeleton className="md:max-w-full card rounded-2xl gap-3">
+        <Skeleton className="gap-3 md:max-w-full card rounded-2xl">
             <header className="flex items-center gap-2">
                 <AvatarSkeleton />
                 <div>
@@ -38,7 +38,7 @@ const PostSkeleton = () => {
                         <Skeleton className="h-2 w-[5rem] inline-block" />
                     </span>{" "}
                     <br />
-                    <span className="text-neutral-800 text-sm">
+                    <span className="text-sm text-neutral-800">
                         <Skeleton className="h-2 w-[5rem] inline-block" />
                         <DotSeparator className="ml-2 mr-1" />{" "}
                         <img
@@ -51,7 +51,7 @@ const PostSkeleton = () => {
                 </div>
             </header>
 
-            <Skeleton className="h-2 w-full mt-4" />
+            <Skeleton className="w-full h-2 mt-4" />
             <Skeleton className="h-2 w-[90%]" />
             <Skeleton className="h-2 w-[80%]" />
 
@@ -128,7 +128,7 @@ const PostHeader = ({
     const isConnected = post.user.connections.includes(user._id)
 
     return (
-        <header className="flex items-center gap-2 justify-between">
+        <header className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
                 <Link
                     onClick={(e) => e.stopPropagation()}
@@ -152,12 +152,12 @@ const PostHeader = ({
                         <Link
                             onClick={(e) => e.stopPropagation()}
                             to={`/users/${post.user._id}`}
-                            className="lg:text-neutral-800 font-light  hover:underline"
+                            className="font-light lg:text-neutral-800 hover:underline"
                         >
                             @{post.user.username}
                         </Link>
                     </p>{" "}
-                    <p className="text-neutral-800 text-sm">
+                    <p className="text-sm text-neutral-800">
                         {formatRelativeDate(post.createdAt)}{" "}
                         <DotSeparator className="mr-1" />{" "}
                         <img

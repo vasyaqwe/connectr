@@ -47,14 +47,11 @@ export const Header = () => {
     ]
 
     return (
-        <header className="bg-neutral-100 shadow-md py-4">
-            <div className="container mx-auto flex items-center justify-between">
+        <header className="py-4 shadow-md bg-neutral-100">
+            <div className="container flex items-center justify-between mx-auto">
                 <Logo />
                 <div className="flex items-center gap-2">
-                    <button
-                        className="focus:outline-none
-                       focus-visible:outline-accent-300 "
-                    >
+                    <button className="focus:outline-none focus-visible:outline-accent-300 ">
                         <Avatar
                             src={user?.profileImageUrl ?? ""}
                             alt={"Profile image"}

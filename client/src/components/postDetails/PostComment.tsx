@@ -200,9 +200,9 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
         return (
             <div
                 ref={ref}
-                className="card max-w-full rounded-xl shadow-none p-3 lg:p-5 gap-4 from-white to-white"
+                className="max-w-full gap-4 p-3 shadow-none card rounded-xl lg:p-5 from-white to-white"
             >
-                <header className="flex items-center gap-2 justify-between">
+                <header className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
                         <Link to={`/users/${comment.user._id}`}>
                             <Avatar
@@ -221,12 +221,12 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
                                 <DotSeparator className="mr-1" />
                                 <Link
                                     to={`/users/${comment.user._id}`}
-                                    className="lg:text-neutral-800 lg:font-light text-sm hover:underline"
+                                    className="text-sm lg:text-neutral-800 lg:font-light hover:underline"
                                 >
                                     @{comment.user.username}
                                 </Link>
                             </p>{" "}
-                            <p className="text-neutral-800 text-sm">
+                            <p className="text-sm text-neutral-800">
                                 {formatRelativeDate(comment.createdAt)}{" "}
                                 <DotSeparator className="mr-1" />{" "}
                                 <img
@@ -285,7 +285,7 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
 
 const PostCommentSkeleton = () => {
     return (
-        <Skeleton className="max-w-full card rounded-xl shadow-none p-5 from-white to-white gap-2">
+        <Skeleton className="max-w-full gap-2 p-5 shadow-none card rounded-xl from-white to-white">
             <header className="flex items-center gap-2">
                 <AvatarSkeleton />
                 <div>
@@ -295,7 +295,7 @@ const PostCommentSkeleton = () => {
                         <Skeleton className="h-2 w-[5rem] inline-block" />
                     </span>{" "}
                     <br />
-                    <span className="text-neutral-800 text-sm">
+                    <span className="text-sm text-neutral-800">
                         <Skeleton className="h-2 w-[5rem] inline-block" />
                         <DotSeparator className="ml-2 mr-1" />{" "}
                         <img
@@ -308,7 +308,7 @@ const PostCommentSkeleton = () => {
                 </div>
             </header>
 
-            <Skeleton className="h-2 w-full mt-4" />
+            <Skeleton className="w-full h-2 mt-4" />
             <Skeleton className="h-2 w-[90%]" />
 
             <div className="flex items-center mt-5">

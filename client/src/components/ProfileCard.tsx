@@ -27,17 +27,17 @@ const ProfileCard = ({ userId }: { userId: string }) => {
             ) : isLoading ? (
                 <ProfileCardSkeleton />
             ) : (
-                <div className="card items-start ">
+                <div className="items-start card ">
                     <div className="flex items-center gap-2">
                         <Avatar
                             src={data.profileImageUrl}
                             alt={data.fullName}
                         />
                         <div>
-                            <p className="font-semibold text-lg leading-5">
+                            <p className="text-lg font-semibold leading-5">
                                 {data.fullName}
                             </p>
-                            <p className="text-neutral-800 text-sm">
+                            <p className="text-sm text-neutral-800">
                                 @{data.username}
                             </p>
                         </div>
@@ -87,7 +87,7 @@ const ProfileCard = ({ userId }: { userId: string }) => {
 
 const ProfileCardSkeleton = () => {
     return (
-        <Skeleton className="card rounded-2xl gap-3">
+        <Skeleton className="gap-3 card rounded-2xl">
             <div className="flex items-center gap-3 mb-4">
                 <AvatarSkeleton />
                 <div>

@@ -47,7 +47,7 @@ export const PasswordStep = ({
                     type="password"
                 />
             </div>
-            <div className="flex flex-col mt-3 gap-3 items-center">
+            <div className="flex flex-col items-center gap-3 mt-3">
                 <Button
                     isLoading={isLoading}
                     disabled={isLoading}

@@ -57,7 +57,7 @@ export const Home = () => {
             {error ? (
                 <ErrorMessage message={safeError(error)} />
             ) : (
-                <div className="pb-8 flex flex-col gap-3">
+                <div className="flex flex-col gap-3 pb-8">
                     <NewPost />
                     {isLoading ? (
                         <>
@@ -68,7 +68,7 @@ export const Home = () => {
                             <PostSkeleton />
                         </>
                     ) : posts.length < 1 ? (
-                        <p className="mt-8 mx-4 text-lg font-semibold">
+                        <p className="mx-4 mt-8 text-lg font-semibold">
                             Be the first to post something.
                         </p>
                     ) : (

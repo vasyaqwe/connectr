@@ -30,10 +30,10 @@ export const PostDetails = () => {
     return (
         <div className="grid gap-4 md:grid-cols-[40%,1fr] md:gap-10 xl:grid-cols-[30%,1fr,15%] items-start">
             <ProfileCard userId={user._id} />
-            <div className="pb-8 grid gap-3">
+            <div className="grid gap-3 pb-8">
                 <Link
                     to={"/"}
-                    className="link w-fit flex items-center gap-1"
+                    className="flex items-center gap-1 link w-fit"
                 >
                     <img
                         className="rotate-180"

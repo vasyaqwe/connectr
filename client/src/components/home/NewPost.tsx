@@ -106,7 +106,7 @@ export const NewPost = () => {
                     <Button
                         disabled={isLoading || formData.body.trim().length < 1}
                         isLoading={isLoading}
-                        className="ml-auto mt-3"
+                        className="mt-3 ml-auto"
                     >
                         Post
                     </Button>

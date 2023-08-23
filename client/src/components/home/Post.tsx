@@ -130,7 +130,7 @@ export const Post = forwardRef<HTMLElement, { post: PostType }>(
                     navigate(`/posts/${post._id}`)
                 }}
                 ref={ref}
-                className="card md:max-w-full cursor-pointer"
+                className="cursor-pointer card md:max-w-full"
             >
                 <PostHeader
                     onToggleConnect={onToggleConnect}

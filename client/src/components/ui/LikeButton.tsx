@@ -64,8 +64,7 @@ export const LikeButton = ({ onLike, liked, ...rest }: LikeButtonProps) => {
             variant="icon"
             {...rest}
             ref={scope}
-            className="relative isolate
-          "
+            className="relative isolate"
             onClick={(e) => {
                 e.stopPropagation()
                 onLikeClick()

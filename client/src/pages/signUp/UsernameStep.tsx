@@ -29,7 +29,7 @@ export const UsernameStep = ({
                     type="text"
                 />
             </div>
-            <div className="flex flex-col gap-3 mt-3 items-center">
+            <div className="flex flex-col items-center gap-3 mt-3">
                 <Button
                     isLoading={isLoading}
                     disabled={isLoading}

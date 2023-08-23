@@ -29,7 +29,7 @@ export const EmailStep = ({
                     type="text"
                 />
             </div>
-            <div className="flex flex-col mt-3 gap-3">
+            <div className="flex flex-col gap-3 mt-3">
                 <Button
                     isLoading={isLoading}
                     disabled={isLoading}

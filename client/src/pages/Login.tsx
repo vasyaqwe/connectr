@@ -54,19 +54,19 @@ export const Login = () => {
 
     return (
         <div className="min-h-screen px-4 pt-16 md:pt-28 ">
-            <div className="flex items-center justify-center mb-8  gap-4">
+            <div className="flex items-center justify-center gap-4 mb-8">
                 <img
                     src={logo}
                     alt="Connectr "
                 />
-                <h1 className="text-5xl text-center gradient-text font-semibold">
+                <h1 className="text-5xl font-semibold text-center gradient-text">
                     Connectr
                 </h1>
             </div>
-            <h2 className="text-3xl sm:text-4xl text-center font-semibold">
+            <h2 className="text-3xl font-semibold text-center sm:text-4xl">
                 Welcome back.
             </h2>
-            <div className="card mt-10">
+            <div className="mt-10 card">
                 <form
                     className="flex flex-col gap-4"
                     onSubmit={(e) => {
@@ -125,7 +125,7 @@ export const Login = () => {
                         checked={persist}
                         label={"Remember me"}
                     />
-                    <p className="text-neutral-800 text-center">
+                    <p className="text-center text-neutral-800">
                         Don't have an account yet?{" "}
                         <Link
                             className="link"

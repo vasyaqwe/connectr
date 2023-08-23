@@ -49,7 +49,7 @@ const NewPostComment = ({ post }: { post: Post }) => {
                 e.preventDefault()
                 onPostComment()
             }}
-            className="border-t border-neutral-600 pt-5 relative"
+            className="relative pt-5 border-t border-neutral-600"
         >
             <Textarea
                 id="new-post-comment"
@@ -65,7 +65,7 @@ const NewPostComment = ({ post }: { post: Post }) => {
             <Button
                 disabled={postCommentLoading || formData.body.trim().length < 1}
                 isLoading={postCommentLoading}
-                className="ml-auto mt-3 absolute bottom-3 right-3"
+                className="absolute mt-3 ml-auto bottom-3 right-3"
             >
                 Post
             </Button>

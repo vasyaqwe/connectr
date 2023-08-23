@@ -84,11 +84,11 @@ export const UserProfile = () => {
             {error ? (
                 <ErrorMessage message={safeError(error)} />
             ) : (
-                <div className="pb-8 flex flex-col gap-3">
+                <div className="flex flex-col gap-3 pb-8">
                     <button
                         role="link"
                         onClick={() => navigate(-1)}
-                        className="link w-fit flex items-center gap-1"
+                        className="flex items-center gap-1 link w-fit"
                     >
                         <img
                             className="rotate-180"
@@ -106,7 +106,7 @@ export const UserProfile = () => {
                             <PostSkeleton />
                         </>
                     ) : posts.length < 1 ? (
-                        <p className="mt-8 mx-4 text-lg font-semibold">
+                        <p className="mx-4 mt-8 text-lg font-semibold">
                             Be the first to post something.
                         </p>
                     ) : (

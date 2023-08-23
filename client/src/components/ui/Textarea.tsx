@@ -10,7 +10,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     ({ invalid = false, className = "", ...rest }, ref) => {
         const style = invalid
             ? "outline outline-[2px] outline-offset-2 outline-danger-400"
-            : "focus:outline-none focus:outline-accent-300"
+            : "focuss:outline-none focus:outline-accent-300"
 
         return (
             <textarea
