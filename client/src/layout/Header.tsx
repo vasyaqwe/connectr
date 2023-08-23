@@ -4,7 +4,7 @@ import { Logo } from "@/components/Logo"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useErrorToast } from "@/hooks/useErrorToast"
 import { useAuthStore } from "@/stores/useAuthStore"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { logout } from "@/api/auth"
 import doorArrow from "@/assets/doorArrow.svg"
 import { useAuth } from "@/hooks/useAuth"
@@ -51,12 +51,12 @@ export const Header = () => {
             <div className="container flex items-center justify-between mx-auto">
                 <Logo />
                 <div className="flex items-center gap-2">
-                    <button className="focus:outline-none focus-visible:outline-accent-300 ">
+                    <Link to={`/users/${user?._id}`}>
                         <Avatar
                             src={user?.profileImageUrl ?? ""}
                             alt={"Profile image"}
                         />
-                    </button>
+                    </Link>
 
                     <DropdownMenu
                         variant="dark"

@@ -1,8 +1,4 @@
-import {
-    useInfiniteQuery,
-    useQuery,
-    useQueryClient,
-} from "@tanstack/react-query"
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query"
 import { useEffect, useRef } from "react"
 import { useIntersection } from "@mantine/hooks"
 import { ProfileCard } from "@/components/ProfileCard"
@@ -16,18 +12,17 @@ import { useNavigate, useParams } from "react-router-dom"
 import { getUserPosts, viewUserProfile } from "@/api/users"
 import arrow from "@/assets/arrow.svg"
 import { useAuth } from "@/hooks/useAuth"
+import { NewPost } from "@/components/home/NewPost"
+import { Shell } from "@/components/ui/Shell"
+import { SuggestionsCard } from "@/components/SuggestionsCard"
 
 export const UserProfile = () => {
     const user = useAuth()
     const { id } = useParams()
 
     const navigate = useNavigate()
-    const queryClient = useQueryClient()
 
     useQuery(["users", id], () => viewUserProfile(id!), {
-        onSuccess: () => {
-            queryClient.invalidateQueries(["users", id])
-        },
         refetchOnWindowFocus: false,
         retry: false,
     })
@@ -57,7 +52,7 @@ export const UserProfile = () => {
         isFetchingNextPage,
         fetchNextPage,
     } = useInfiniteQuery(
-        ["posts"],
+        ["users", id, "posts"],
         ({ pageParam = 1 }) => getUserPosts({ page: pageParam, id: id! }),
         {
             getNextPageParam: (res, pages) => {
@@ -79,7 +74,7 @@ export const UserProfile = () => {
     const posts = data?.pages.flatMap((page) => page.posts) ?? []
 
     return (
-        <div className="grid gap-4 lg:grid-cols-[40%,1fr] md:gap-10 xl:grid-cols-[30%,1fr,15%] items-start">
+        <Shell>
             <ProfileCard userId={id!} />
             {error ? (
                 <ErrorMessage message={safeError(error)} />
@@ -97,6 +92,7 @@ export const UserProfile = () => {
                         />
                         Back
                     </button>
+                    <NewPost />
                     {isLoading ? (
                         <>
                             <PostSkeleton />
@@ -107,7 +103,7 @@ export const UserProfile = () => {
                         </>
                     ) : posts.length < 1 ? (
                         <p className="mx-4 mt-8 text-lg font-semibold">
-                            Be the first to post something.
+                            No posts yet.
                         </p>
                     ) : (
                         posts.map((post: PostType, idx) => {
@@ -134,6 +130,7 @@ export const UserProfile = () => {
                     )}
                 </div>
             )}
-        </div>
+            <SuggestionsCard />
+        </Shell>
     )
 }

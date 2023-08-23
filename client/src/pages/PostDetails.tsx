@@ -8,6 +8,8 @@ import { PostSkeleton } from "@/components/Post"
 import { useErrorToast } from "@/hooks/useErrorToast"
 import { useAuth } from "@/hooks/useAuth"
 import { DecodedToken } from "@/types"
+import { SuggestionsCard } from "@/components/SuggestionsCard"
+import { Shell } from "@/components/ui/Shell"
 
 export const PostDetails = () => {
     const { id } = useParams()
@@ -28,7 +30,7 @@ export const PostDetails = () => {
     if (error && error instanceof Error) return <Navigate to={".."} />
 
     return (
-        <div className="grid gap-4 md:grid-cols-[40%,1fr] md:gap-10 xl:grid-cols-[30%,1fr,15%] items-start">
+        <Shell>
             <ProfileCard userId={user._id} />
             <div className="grid gap-3 pb-8">
                 <Link
@@ -44,6 +46,7 @@ export const PostDetails = () => {
                 </Link>
                 {isLoading ? <PostSkeleton /> : <Post post={post!} />}
             </div>
-        </div>
+            <SuggestionsCard />
+        </Shell>
     )
 }

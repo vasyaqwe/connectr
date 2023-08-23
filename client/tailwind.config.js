@@ -6,9 +6,6 @@ export default {
         container: {
             padding: {
                 DEFAULT: "1rem",
-                sm: "2rem",
-                lg: "4rem",
-                xl: "5rem",
                 "2xl": "6rem",
             },
         },
@@ -21,6 +18,7 @@ export default {
                     400: "#334fa3",
                 },
                 secondary: {
+                    100: "#ecf0f8",
                     400: "#c2cfe9",
                     900: "#05080e",
                 },

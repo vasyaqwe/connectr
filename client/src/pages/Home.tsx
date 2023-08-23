@@ -11,6 +11,8 @@ import { Post } from "@/components/home/Post"
 import { NewPost } from "@/components/home/NewPost"
 import { safeError } from "@/lib/utils"
 import { useAuth } from "@/hooks/useAuth"
+import { SuggestionsCard } from "@/components/SuggestionsCard"
+import { Shell } from "@/components/ui/Shell"
 
 export const Home = () => {
     const user = useAuth() as DecodedToken
@@ -52,7 +54,7 @@ export const Home = () => {
     const posts = data?.pages.flatMap((page) => page.posts) ?? []
 
     return (
-        <div className="grid gap-4 lg:grid-cols-[40%,1fr] md:gap-10 xl:grid-cols-[30%,1fr,15%] items-start">
+        <Shell>
             <ProfileCard userId={user._id} />
             {error ? (
                 <ErrorMessage message={safeError(error)} />
@@ -96,6 +98,7 @@ export const Home = () => {
                     )}
                 </div>
             )}
-        </div>
+            <SuggestionsCard />
+        </Shell>
     )
 }

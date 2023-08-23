@@ -19,7 +19,9 @@ export const googleLogin = async (code: string) =>
         )
     )
 
-export const login = async (credentials: UserCredentials) =>
+export const login = async (
+    credentials: UserCredentials
+): Promise<{ accessToken: string }> =>
     axiosRequest(() =>
         defaultAxios.post(`/auth`, credentials, {
             withCredentials: true,

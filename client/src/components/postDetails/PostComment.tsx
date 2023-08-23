@@ -228,7 +228,7 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
                             </p>{" "}
                             <p className="text-sm text-neutral-800">
                                 {formatRelativeDate(comment.createdAt)}{" "}
-                                <DotSeparator className="mr-1" />{" "}
+                                <DotSeparator className="m-0" />{" "}
                                 <img
                                     className="inline mb-1 mr-1"
                                     src={location}
@@ -297,7 +297,7 @@ const PostCommentSkeleton = () => {
                     <br />
                     <span className="text-sm text-neutral-800">
                         <Skeleton className="h-2 w-[5rem] inline-block" />
-                        <DotSeparator className="ml-2 mr-1" />{" "}
+                        <DotSeparator className="ml-2 mr-0" />{" "}
                         <img
                             className="inline mb-1 mr-1"
                             src={location}

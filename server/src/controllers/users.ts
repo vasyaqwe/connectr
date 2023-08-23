@@ -1,4 +1,4 @@
-import User from "../models/User"
+import User, { UserType } from "../models/User"
 import bcrypt from "bcrypt"
 import { Request, Response } from "express"
 import { Types } from "mongoose"
@@ -54,6 +54,47 @@ export const getUser = async (req: Request, res: Response) => {
     }
 
     res.json(user)
+}
+
+export const getUserSuggestions = async (req: Request, res: Response) => {
+    const { id } = req.params
+
+    if (!id || !Types.ObjectId.isValid(id)) {
+        res.status(400).json({ message: "Invalid user id" })
+        return
+    }
+
+    const user = await User.findById(id)
+        .select("-password")
+        .populate("connections")
+
+    if (!user) {
+        res.status(400).json({ message: "No user found" })
+        return
+    }
+
+    let suggestions: Types.ObjectId[] = []
+
+    for (const connection of user.connections) {
+        const connectionUser = await User.findById(connection._id).populate(
+            "connections"
+        )
+
+        if (connectionUser) {
+            for (const suggestedConnection of connectionUser.connections) {
+                if (
+                    !user.connections.some((existingConnection) =>
+                        existingConnection.equals(suggestedConnection._id)
+                    ) &&
+                    !suggestedConnection.equals(user._id)
+                ) {
+                    suggestions.push(suggestedConnection)
+                }
+            }
+        }
+    }
+
+    res.json(suggestions)
 }
 
 export const toggleConnect = async (req: Request, res: Response) => {

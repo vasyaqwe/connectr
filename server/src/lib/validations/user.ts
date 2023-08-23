@@ -15,7 +15,7 @@ export const userSchema = z.object({
     password: z.string().min(6, {
         message: "Password must be at least 6 characters",
     }),
-    connections: z.array(z.instanceof(Types.ObjectId)).optional(),
+    connections: z.array(z.instanceof(Types.ObjectId)).default([]),
     googleId: z.string().optional(),
     location: z.string().nonempty().optional(),
     profileImageUrl: z.string().optional(),
