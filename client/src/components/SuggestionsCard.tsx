@@ -31,7 +31,8 @@ const SuggestionsCard = () => {
     )
 
     const { error: connectError, mutate: onToggleConnect } = useMutation(
-        (suggestionUserId: string) => toggleConnect(user._id, suggestionUserId),
+        (suggestionUserId: string) =>
+            toggleConnect({ userId: user._id, connectionId: suggestionUserId }),
         {
             onMutate: async (suggestionUserId) => {
                 // Stop the queries that may affect this operation
