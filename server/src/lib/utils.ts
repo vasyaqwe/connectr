@@ -13,8 +13,6 @@ export const cookieMaxAge = 7 * 24 * 60 * 60 * 1000
 
 export const rawCookieConfig: CookieOptions = {
     httpOnly: true,
-    secure: true,
-    sameSite: "none",
 }
 
 export const cookieConfig: CookieOptions = {
