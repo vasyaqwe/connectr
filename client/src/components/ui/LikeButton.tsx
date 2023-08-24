@@ -54,6 +54,9 @@ export const LikeButton = ({ onLike, liked, ...rest }: LikeButtonProps) => {
         ])
 
         if (!liked) {
+            if ("vibrate" in navigator) {
+                navigator.vibrate(100)
+            }
             animate([...heartsReset, ...heartsAnimation, ...heartsFadeOut])
         }
         onLike()

@@ -88,7 +88,7 @@ const SuggestionsCard = () => {
                             const isConnected = [""].includes(suggestedUser._id)
                             return (
                                 <div
-                                    key={user._id}
+                                    key={suggestedUser._id}
                                     className="flex items-center w-full gap-2"
                                 >
                                     <Link to={`/users/${suggestedUser._id}`}>
