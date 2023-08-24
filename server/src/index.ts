@@ -18,7 +18,7 @@ const app = express()
 connectDB()
 
 const corsOptions = {
-    origin: ["http://localhost:5173", "https://connectr.vercel.app"],
+    origin: ["http://localhost:5173", "https://connectr.netlify.app"],
     credentials: true,
 }
 
