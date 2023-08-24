@@ -1,6 +1,6 @@
 # netlify.toml
 [[redirects]]
-from = "/*"
+  from = "/api/*"
 to = "https://connectr-api.vercel.app/:splat"
 status = 200
 force = true
