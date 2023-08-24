@@ -11,7 +11,11 @@ export const accessTokenExpiresIn = "15m"
 export const refreshTokenExpiresIn = "7d"
 export const cookieMaxAge = 7 * 24 * 60 * 60 * 1000
 
-export const rawCookieConfig: CookieOptions = {}
+export const rawCookieConfig: CookieOptions = {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+}
 
 export const cookieConfig: CookieOptions = {
     ...rawCookieConfig,
