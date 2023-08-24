@@ -1,13 +1,7 @@
 # netlify.toml
 [[redirects]]
-  from = "/api/*"
+from = "/api/*"
 to = "https://connectr-api.vercel.app/:splat"
 status = 200
 force = true
 headers = {Origin = "https://connectr.netlify.app"}
-
-
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 20
