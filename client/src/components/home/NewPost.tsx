@@ -10,9 +10,13 @@ import { createPost } from "@/api/posts"
 import { useStore } from "@/stores/useStore"
 import { RawPost } from "@/types"
 import { AnimatePresence, motion } from "framer-motion"
+import { useLocation } from "react-router-dom"
+import { useAuth } from "@/hooks/useAuth"
 
 export const NewPost = () => {
     const { openToast } = useStore()
+    const user = useAuth()
+    const { pathname } = useLocation()
 
     const [formData, setFormData] = useState<RawPost>({
         body: "",
@@ -39,6 +43,9 @@ export const NewPost = () => {
                 }
                 setFormData(() => ({ image: undefined, body: "" }))
                 queryClient.invalidateQueries(["posts"])
+                if (pathname.includes("users")) {
+                    queryClient.invalidateQueries(["users", user?._id, "posts"])
+                }
                 openToast({ text: "New post created" })
             },
         }
@@ -118,7 +125,7 @@ export const NewPost = () => {
                             animate={{ opacity: 1 }}
                             exit={{ opacity: 0 }}
                             transition={{ duration: 0.2 }}
-                            className="mx-auto mt-4"
+                            className="mx-auto mt-4 rounded-md"
                             src={URL.createObjectURL(formData.image)}
                         />
                     )}

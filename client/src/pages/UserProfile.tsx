@@ -92,7 +92,7 @@ export const UserProfile = () => {
                         />
                         Back
                     </button>
-                    <NewPost />
+                    {user?._id === id && <NewPost />}
                     {isLoading ? (
                         <>
                             <PostSkeleton />
