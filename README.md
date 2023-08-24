@@ -19,6 +19,6 @@ react
 zod
 tailwind
 
-Live demo - https://connectr.vercel.app/
+Live demo - https://connectr.netlify.app/
 
 You can find me here - https://www.upwork.com/freelancers/~015c1b113a62e11b13

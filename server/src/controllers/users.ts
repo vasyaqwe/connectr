@@ -26,11 +26,11 @@ export const checkEmail = async (req: Request, res: Response) => {
 export const checkUsername = async (req: Request, res: Response) => {
     const { username } = req.body
 
-    const user = await User.findOne({ username, googleId: { $exists: false } })
+    const user = await User.findOne({ username })
 
     if (user) {
         res.status(409).json({
-            message: "This username is already taken by someone.",
+            message: "This username is already taken by someone",
         })
         return
     }
