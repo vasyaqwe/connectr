@@ -15,6 +15,7 @@ export const rawCookieConfig: CookieOptions = {
     httpOnly: true,
     secure: true,
     sameSite: "none",
+    domain: ".vercel.app",
 }
 
 export const cookieConfig: CookieOptions = {
