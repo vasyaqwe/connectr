@@ -18,7 +18,7 @@ const app = express()
 connectDB()
 
 const corsOptions = {
-    origin: true,
+    origin: ["http://localhost:5173", "https://connectr.vercel.app"],
     credentials: true,
 }
 app.use(cors(corsOptions))
