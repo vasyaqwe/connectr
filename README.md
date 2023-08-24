@@ -19,8 +19,6 @@ react
 zod
 tailwind
 
-Server deployed on render.com | client deployed on netlify.com
-
-Live demo - https://connectr-vasyaqwe.netlify.app/
+Live demo - https://connectr.vercel.app/
 
 You can find me here - https://www.upwork.com/freelancers/~015c1b113a62e11b13
