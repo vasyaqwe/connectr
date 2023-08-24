@@ -26,7 +26,7 @@ export const EmailStep = ({
                     onChange={onChange}
                     id="email"
                     name="email"
-                    type="text"
+                    type="email"
                 />
             </div>
             <div className="flex flex-col gap-3 mt-3">
