@@ -20,7 +20,7 @@ const ProfileCard = ({ userId }: { userId: string }) => {
     )
 
     return (
-        <div className="hidden lg:block">
+        <div className="sticky hidden top-[6rem] lg:block">
             {error ? (
                 <div className="card">
                     <ErrorMessage message={safeError(error)} />

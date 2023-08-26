@@ -47,7 +47,7 @@ export const Header = () => {
     ]
 
     return (
-        <header className="py-4 shadow-md bg-neutral-100">
+        <header className="sticky top-0 z-10 py-4 shadow-md bg-neutral-100">
             <div className="container flex items-center justify-between mx-auto">
                 <Logo />
                 <div className="flex items-center gap-2">
