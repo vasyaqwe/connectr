@@ -1,6 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom"
 import { PersistLogin } from "./wrappers/PersistLogin"
-import { RequireAuth } from "./wrappers/RequireAuth"
 import { Home } from "./pages/Home"
 import { Layout } from "./layout/Layout"
 import { Login } from "./pages/Login"
@@ -25,20 +24,18 @@ function App() {
                 />
 
                 <Route element={<PersistLogin />}>
-                    <Route element={<RequireAuth />}>
-                        <Route
-                            index
-                            element={<Home />}
-                        />
-                        <Route
-                            path="/posts/:id"
-                            element={<PostDetails />}
-                        />
-                        <Route
-                            path="/users/:id"
-                            element={<UserProfile />}
-                        />
-                    </Route>
+                    <Route
+                        index
+                        element={<Home />}
+                    />
+                    <Route
+                        path="/posts/:id"
+                        element={<PostDetails />}
+                    />
+                    <Route
+                        path="/users/:id"
+                        element={<UserProfile />}
+                    />
                 </Route>
 
                 <Route
