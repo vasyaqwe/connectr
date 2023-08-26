@@ -1,42 +1,43 @@
 import { create } from "zustand"
 import { devtools } from "zustand/middleware"
 
-interface ToastPayload {
+type ToastPayload = {
     text: string
     error?: boolean
     alert?: boolean
 }
-interface Toast extends ToastPayload {
+type Toast = {
     open: boolean
     text: string
     error?: boolean
     alert?: boolean
+} & ToastPayload
+
+const dialogs = {
+    createAccount: false,
 }
 
-interface StoreState {
-    modals: Record<string, boolean>
+type Dialog = keyof typeof dialogs
+type StoreState = {
+    dialogs: typeof dialogs
     toast: Toast
     onBackdropClick: () => void
-    openModal: (modal: string) => void
-    closeModal: (modal: string) => void
+    showDialog: (dialog: Dialog) => void
+    closeDialog: (dialog: Dialog) => void
     openToast: (payload: ToastPayload) => void
     closeToast: () => void
 }
 
 export const useStore = create<StoreState>()(
     devtools((set, get) => ({
-        modals: {
-            createInvoice: false,
-            confirmDeletion: false,
-            editInvoice: false,
-        },
+        dialogs,
         onBackdropClick: () => {
-            const target = Object.keys(get().modals).find(
-                (v) => get().modals[v]
+            const target = Object.keys(get().dialogs).find(
+                (v) => get().dialogs[v as keyof typeof dialogs]
             )
             if (target)
                 set((state) => ({
-                    modals: { ...state.modals, [target]: false },
+                    dialogs: { ...state.dialogs, [target]: false },
                 }))
         },
         toast: { open: false, text: "", error: false, alert: false },
@@ -51,9 +52,11 @@ export const useStore = create<StoreState>()(
             })),
         closeToast: () =>
             set((state) => ({ toast: { ...state.toast, open: false } })),
-        openModal: (modal) =>
-            set((state) => ({ modals: { ...state.modals, [modal]: true } })),
-        closeModal: (modal) =>
-            set((state) => ({ modals: { ...state.modals, [modal]: false } })),
+        showDialog: (dialog) =>
+            set((state) => ({ dialogs: { ...state.dialogs, [dialog]: true } })),
+        closeDialog: (dialog) =>
+            set((state) => ({
+                dialogs: { ...state.dialogs, [dialog]: false },
+            })),
     }))
 )

@@ -1,5 +1,5 @@
 import { useAuth } from "@/hooks/useAuth"
-import { DecodedToken, Post } from "@/types"
+import { Post } from "@/types"
 import { formatRelativeDate, formatNumber } from "@/lib/utils"
 import location from "@/assets/location-small.svg"
 import link from "@/assets/link.svg"
@@ -21,6 +21,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { deletePost } from "@/api/posts"
 import { useErrorToast } from "@/hooks/useErrorToast"
 import { useStore } from "@/stores/useStore"
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn"
 
 const PostSkeleton = () => {
     const { pathname } = useLocation()
@@ -85,7 +86,9 @@ const PostHeader = ({
     post: Post
     onToggleConnect: (postUserId: string) => void
 }) => {
-    const user = useAuth() as DecodedToken
+    const user = useAuth()
+
+    const { isLoggedIn } = useIsLoggedIn()
 
     const { openToast } = useStore()
 
@@ -125,12 +128,13 @@ const PostHeader = ({
         },
     ]
 
-    const isConnected = post.user.connections.includes(user._id)
+    const isConnected = user && post.user.connections.includes(user._id)
 
     return (
         <header className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-2">
                 <Link
+                    className="focus"
                     onClick={(e) => e.stopPropagation()}
                     to={`/users/${post.user._id}`}
                 >
@@ -144,7 +148,7 @@ const PostHeader = ({
                         <Link
                             onClick={(e) => e.stopPropagation()}
                             to={`/users/${post.user._id}`}
-                            className="hidden sm:inline-block hover:underline"
+                            className="hidden focus sm:inline-block hover:underline"
                         >
                             {post.user.fullName}
                         </Link>
@@ -152,7 +156,7 @@ const PostHeader = ({
                         <Link
                             onClick={(e) => e.stopPropagation()}
                             to={`/users/${post.user._id}`}
-                            className="font-light sm:text-neutral-800 hover:underline"
+                            className="font-light focus sm:text-neutral-800 hover:underline"
                         >
                             @{post.user.username}
                         </Link>
@@ -169,13 +173,13 @@ const PostHeader = ({
                     </p>
                 </div>
             </div>
-            {user._id !== post.user._id ? (
+            {user?._id !== post.user._id ? (
                 <Tooltip text={isConnected ? "Disconnect" : "Connect"}>
                     <Button
                         variant={isConnected ? "iconActive" : "icon"}
                         onClick={(e) => {
                             e.stopPropagation()
-                            onToggleConnect(post.user._id)
+                            isLoggedIn(() => onToggleConnect(post.user._id))
                         }}
                     >
                         {isConnected ? (
@@ -219,13 +223,13 @@ const PostBody = ({ post }: { post: Post }) => {
 }
 
 const PostFooter = ({ post, onLike }: { post: Post; onLike: () => void }) => {
-    const user = useAuth() as DecodedToken
+    const user = useAuth()
 
     return (
         <div className="flex items-center">
             <LikeButton
                 onLike={onLike}
-                liked={post.likes.includes(user._id)}
+                liked={user && post.likes.includes(user._id) ? true : false}
             />
             <p className="mr-auto">
                 {" "}

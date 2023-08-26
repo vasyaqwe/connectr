@@ -1,5 +1,5 @@
 import { useAuth } from "@/hooks/useAuth"
-import { Comment, DecodedToken, PaginatedData, Post } from "@/types"
+import { Comment, PaginatedData, Post } from "@/types"
 import {
     formatRelativeDate,
     formatNumber,
@@ -28,6 +28,7 @@ import { useStore } from "@/stores/useStore"
 import { DropdownMenu, DropdownMenuOptions } from "../ui/DropdownMenu"
 import { toggleConnect } from "@/api/users"
 import { Link } from "react-router-dom"
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn"
 
 type PostCommentProps = {
     comment: Comment
@@ -38,7 +39,9 @@ type CommentsInfiniteData = InfiniteData<PaginatedData<Comment, "comments">>
 
 const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
     ({ comment, post }, ref) => {
-        const user = useAuth() as DecodedToken
+        const user = useAuth()
+
+        const { isLoggedIn } = useIsLoggedIn()
 
         const { openToast } = useStore()
 
@@ -64,14 +67,14 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
                             }
 
                             const liked = paginatedComment.likes.includes(
-                                user._id
+                                user!._id
                             )
 
                             const updatedLikes = liked
                                 ? paginatedComment.likes.filter(
-                                      (userLike) => userLike !== user._id
+                                      (userLike) => userLike !== user!._id
                                   )
-                                : [...paginatedComment.likes, user._id]
+                                : [...paginatedComment.likes, user!._id]
 
                             return {
                                 ...paginatedComment,
@@ -106,7 +109,7 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
         const { error: connectError, mutate: onToggleConnect } = useMutation(
             (commentUserId: string) =>
                 toggleConnect({
-                    userId: user._id,
+                    userId: user!._id,
                     connectionId: commentUserId,
                 }),
             {
@@ -161,7 +164,7 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
                 },
                 onSuccess: () => {
                     queryClient.invalidateQueries(queryKey)
-                    queryClient.invalidateQueries(["users", user._id])
+                    queryClient.invalidateQueries(["users", user!._id])
                 },
             }
         )
@@ -204,7 +207,7 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
             },
         ]
 
-        const isConnected = comment.user.connections.includes(user._id)
+        const isConnected = user && comment.user.connections.includes(user._id)
 
         return (
             <div
@@ -247,13 +250,15 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
                             </p>
                         </div>
                     </div>
-                    {user._id !== comment.user._id ? (
+                    {user?._id !== comment.user._id ? (
                         <Tooltip text={isConnected ? "Disconnect" : "Connect"}>
                             <Button
                                 variant={isConnected ? "iconActive" : "icon"}
                                 onClick={(e) => {
                                     e.preventDefault()
-                                    onToggleConnect(comment.user._id)
+                                    isLoggedIn(() =>
+                                        onToggleConnect(comment.user._id)
+                                    )
                                 }}
                             >
                                 {isConnected ? (
@@ -280,7 +285,11 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
                 <div className="flex items-center">
                     <LikeButton
                         onLike={onLike}
-                        liked={comment.likes.includes(user._id)}
+                        liked={
+                            user && comment.likes.includes(user._id)
+                                ? true
+                                : false
+                        }
                     />
                     <p className="mr-auto">
                         {" "}

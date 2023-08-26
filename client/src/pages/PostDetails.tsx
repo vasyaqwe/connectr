@@ -7,14 +7,13 @@ import arrow from "@/assets/arrow.svg"
 import { PostSkeleton } from "@/components/Post"
 import { useErrorToast } from "@/hooks/useErrorToast"
 import { useAuth } from "@/hooks/useAuth"
-import { DecodedToken } from "@/types"
 import { SuggestionsCard } from "@/components/SuggestionsCard"
 import { Shell } from "@/components/ui/Shell"
 
 export const PostDetails = () => {
     const { id } = useParams()
 
-    const user = useAuth() as DecodedToken
+    const user = useAuth()
 
     const {
         isLoading,
@@ -31,7 +30,7 @@ export const PostDetails = () => {
 
     return (
         <Shell>
-            <ProfileCard userId={user._id} />
+            <ProfileCard userId={user?._id} />
             <div className="grid gap-3 pb-8">
                 <Link
                     to={"/"}

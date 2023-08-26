@@ -7,9 +7,12 @@ import { useRef, useState } from "react"
 import { Post } from "@/types"
 import { Skeleton } from "../ui/Skeleton"
 import { useStore } from "@/stores/useStore"
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn"
 
 const NewPostComment = ({ post }: { post: Post }) => {
     const { openToast } = useStore()
+
+    const { isLoggedIn } = useIsLoggedIn()
 
     const [formData, setFormData] = useState({
         body: "",
@@ -47,7 +50,7 @@ const NewPostComment = ({ post }: { post: Post }) => {
         <form
             onSubmit={(e) => {
                 e.preventDefault()
-                onPostComment()
+                isLoggedIn(onPostComment)
             }}
             className="relative pt-5 border-t border-neutral-600"
         >

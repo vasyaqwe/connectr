@@ -29,8 +29,8 @@ export const FileInput = ({
             htmlFor="image"
             className={cn(
                 `border duration-100 ease-out cursor-pointer bg-neutral-50
-                       focus-visible:outline-accent-300 focus:outline-none w-8 h-8 grid place-items-center
-            focus-within:bg-neutral-450 hover:bg-neutral-450 transition-colors rounded-md justify-center`,
+                     focus-visible:bg-neutral-450 focus w-8 h-8 grid place-items-center
+          hover:bg-neutral-450 transition-colors rounded-md justify-center`,
                 className
             )}
         >

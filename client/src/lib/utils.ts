@@ -1,7 +1,7 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import jwtDecode from "jwt-decode"
-import { DecodedToken, Post } from "@/types"
+import { DecodedToken, Post, User } from "@/types"
 import { getCurrentAccessToken } from "@/api/config"
 import { Comment } from "@/types"
 
@@ -98,4 +98,15 @@ export const optimisticallyUpdatedLikes = (data: Post) => {
 
         return updatedLikes
     }
+}
+
+export const guestUser: User = {
+    _id: "guest",
+    fullName: "Guest",
+    username: "guest",
+    profileImageUrl: `https://api.dicebear.com/6.x/micah/svg?seed=guest`,
+    email: "",
+    connections: [],
+    password: "",
+    profileViews: 0,
 }

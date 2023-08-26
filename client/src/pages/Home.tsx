@@ -5,7 +5,7 @@ import { ProfileCard } from "@/components/ProfileCard"
 import { getPosts } from "@/api/posts"
 import { ErrorMessage } from "@/components/ui/ErrorMessage"
 import { Spinner } from "@/components/ui/Spinner"
-import { DecodedToken, Post as PostType } from "@/types"
+import { Post as PostType } from "@/types"
 import { PostSkeleton } from "@/components/Post"
 import { Post } from "@/components/home/Post"
 import { NewPost } from "@/components/home/NewPost"
@@ -15,7 +15,7 @@ import { SuggestionsCard } from "@/components/SuggestionsCard"
 import { Shell } from "@/components/ui/Shell"
 
 export const Home = () => {
-    const user = useAuth() as DecodedToken
+    const user = useAuth()
 
     const lastPostRef = useRef<HTMLDivElement>(null)
 
@@ -55,7 +55,7 @@ export const Home = () => {
 
     return (
         <Shell>
-            <ProfileCard userId={user._id} />
+            <ProfileCard userId={user?._id} />
             {error ? (
                 <ErrorMessage message={safeError(error)} />
             ) : (

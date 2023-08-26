@@ -12,10 +12,13 @@ import { RawPost } from "@/types"
 import { AnimatePresence, motion } from "framer-motion"
 import { useLocation } from "react-router-dom"
 import { useAuth } from "@/hooks/useAuth"
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn"
 
 export const NewPost = () => {
     const { openToast } = useStore()
     const user = useAuth()
+    const { isLoggedIn } = useIsLoggedIn()
+
     const { pathname } = useLocation()
 
     const [formData, setFormData] = useState<RawPost>({
@@ -67,7 +70,7 @@ export const NewPost = () => {
             <form
                 onSubmit={(e) => {
                     e.preventDefault()
-                    onSubmit()
+                    isLoggedIn(onSubmit)
                 }}
                 className="w-full"
             >

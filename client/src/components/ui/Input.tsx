@@ -9,7 +9,7 @@ type InputProps = ComponentProps<"input"> & {
 export const Input = ({ invalid, className = "", ...rest }: InputProps) => {
     const style = invalid
         ? "outline outline-[2px] outline-offset-2 outline-danger-400"
-        : "focus:outline-none focus:outline-accent-300"
+        : "focus"
 
     return (
         <>
@@ -20,7 +20,7 @@ export const Input = ({ invalid, className = "", ...rest }: InputProps) => {
                 ${
                     invalid
                         ? " outline outline-[2px] outline-offset-2 outline-danger-400"
-                        : "focus:outline-none focus:outline-accent-300"
+                        : "focus"
                 }
                 `,
                     style,

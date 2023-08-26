@@ -8,13 +8,12 @@ const variantLookup = {
     link: "link border-none",
     outline:
         "min-h-[42px] px-5 py-2 bg-transparent text-neutral-900 border border-neutral-700 hover:bg-neutral-400",
-    ghost: `focus:outline-none
-            focus-within:bg-neutral-450 hover:bg-neutral-450 transition-colors rounded-md w-8 h-8
+    ghost: `focus-visible:bg-neutral-450 hover:bg-neutral-450 transition-colors rounded-md w-8 h-8
                  `,
-    icon: `focus:outline-none border-neutral-600 bg-neutral-50
-            focus-within:bg-neutral-450 hover:bg-neutral-450 transition-colors rounded-md w-8 h-8 justify-center`,
-    iconActive: `focus:outline-none border-neutral-600 bg-accent-400 border-accent-400
-            focus-within:opacity-80 hover:opacity-80 transition-opacity rounded-md w-8 h-8 justify-center`,
+    icon: ` border-neutral-600 bg-neutral-50
+            focus-visible:bg-neutral-450 hover:bg-neutral-450 transition-colors rounded-md w-8 h-8 justify-center`,
+    iconActive: ` border-neutral-600 bg-accent-400 border-accent-400
+            focus-visible:opacity-80 hover:opacity-80 transition-opacity rounded-md w-8 h-8 justify-center`,
 }
 
 const spinnerLookup: { [key: string]: React.ReactElement } = {
@@ -45,8 +44,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 ref={ref}
                 {...rest}
                 className={cn(
-                    ` rounded-md border font-medium transition duration-100 ease-out focus:outline-none
-                       focus-visible:outline-accent-300 group
+                    `rounded-md border font-medium transition duration-100 ease-out focus group
             ${variantLookup[variant]}
             ${arrow ? "min-w-[7rem]" : ""}
              disabled:opacity-70 

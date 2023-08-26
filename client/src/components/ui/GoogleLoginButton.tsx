@@ -38,7 +38,7 @@ export const GoogleLoginButton = () => {
     return (
         <button
             type="button"
-            className="rounded-md flex items-center shadow-md hover:shadow-sm transition-all
+            className="rounded-md flex items-center shadow-md hover:shadow-sm transition-shadow focus
             font-medium border border-transparent bg-white text-neutral-900 justify-center gap-[24px] px-[8px] py-2"
             onClick={() => login()}
         >

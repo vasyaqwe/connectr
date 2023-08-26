@@ -3,25 +3,25 @@ import { useStore } from "@/stores/useStore"
 import { Toast } from "@/components/ui/Toast"
 import { useEffect } from "react"
 import { Header } from "./Header"
-import { useAuth } from "@/hooks/useAuth"
+import { CreateAccountDialog } from "@/components/dialogs/CreateAccountDialog"
 
 export const Layout = () => {
-    const { modals } = useStore()
-    const user = useAuth()
+    const { dialogs } = useStore()
 
     useEffect(() => {
-        if (Object.values(modals).some((v) => v)) {
+        if (Object.values(dialogs).some((v) => v)) {
             document.body.style.overflow = "hidden"
         } else {
             document.body.style.overflow = "auto"
         }
-    }, [modals])
+    }, [dialogs])
 
     return (
         <>
-            {user && <Header />}
+            <Header />
+            <CreateAccountDialog />
             <main className="container mx-auto mt-8 sm:mt-12">
-                <p className="fixed z-[999] w-max text-center p-2 text-xs sm:text-sm -translate-x-1/2 border rounded-md bg-secondary-100 border-secondary-400 bottom-4 left-1/2">
+                <p className="fixed z-[40] w-max text-center p-2 text-xs sm:text-sm -translate-x-1/2 border rounded-md bg-secondary-100 border-secondary-400 bottom-4 left-1/2">
                     Created by{" "}
                     <Link
                         className="link"

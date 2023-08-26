@@ -7,17 +7,19 @@ import { useQuery } from "@tanstack/react-query"
 import { getUser } from "@/api/users"
 import { Skeleton } from "./ui/Skeleton"
 import { ErrorMessage } from "./ui/ErrorMessage"
-import { safeError } from "@/lib/utils"
+import { guestUser, safeError } from "@/lib/utils"
 import { Link } from "react-router-dom"
 
-const ProfileCard = ({ userId }: { userId: string }) => {
-    const { isLoading, error, data } = useQuery(
+const ProfileCard = ({ userId }: { userId: string | undefined }) => {
+    const { isLoading, error, data, fetchStatus } = useQuery(
         ["users", userId],
-        () => getUser(userId),
+        () => getUser(userId!),
         {
-            refetchInterval: 50000,
+            enabled: !!userId,
         }
     )
+
+    const user = userId ? data : guestUser
 
     return (
         <div className="sticky hidden top-[6rem] lg:block">
@@ -25,30 +27,40 @@ const ProfileCard = ({ userId }: { userId: string }) => {
                 <div className="card">
                     <ErrorMessage message={safeError(error)} />
                 </div>
-            ) : isLoading ? (
+            ) : isLoading && fetchStatus !== "idle" ? (
                 <ProfileCardSkeleton />
             ) : (
                 <div className="items-start card ">
                     <div className="flex items-center gap-2">
-                        <Link to={`/users/${userId}`}>
+                        {user?._id === "guest" ? (
                             <Avatar
-                                src={data?.profileImageUrl ?? ""}
-                                alt={data?.fullName ?? ""}
+                                src={user?.profileImageUrl ?? ""}
+                                alt={user?.fullName ?? ""}
                             />
-                        </Link>
+                        ) : (
+                            <Link
+                                className="focus"
+                                to={`/users/${user?._id}`}
+                            >
+                                <Avatar
+                                    src={user?.profileImageUrl ?? ""}
+                                    alt={user?.fullName ?? ""}
+                                />
+                            </Link>
+                        )}
 
                         <div>
                             <Link
                                 to={`/users/${userId}`}
-                                className="block text-lg font-semibold leading-5 hover:underline"
+                                className="block text-lg font-semibold leading-5 focus hover:underline"
                             >
-                                {data?.fullName}
+                                {user?.fullName}
                             </Link>
                             <Link
                                 to={`/users/${userId}`}
-                                className="text-sm text-neutral-800 hover:underline"
+                                className="text-sm focus text-neutral-800 hover:underline"
                             >
-                                @{data?.username}
+                                @{user?.username}
                             </Link>
                         </div>
                     </div>
@@ -57,16 +69,16 @@ const ProfileCard = ({ userId }: { userId: string }) => {
                             src={location}
                             alt="location"
                         />
-                        {data?.location ?? "Earth"}
+                        {user?.location ?? "Earth"}
                     </p>
-                    {data?.bio && (
+                    {user?.bio && (
                         <p className="flex items-start gap-2">
                             <img
                                 className="mt-1"
                                 src={bio}
                                 alt="bio"
                             />
-                            {data?.bio}
+                            {user?.bio}
                         </p>
                     )}
                     <p className="flex items-center gap-2">
@@ -74,8 +86,8 @@ const ProfileCard = ({ userId }: { userId: string }) => {
                             src={link}
                             alt="link"
                         />
-                        {data?.connections.length}
-                        {data?.connections.length === 1
+                        {user?.connections.length}
+                        {user?.connections.length === 1
                             ? " connection"
                             : " connections"}
                     </p>
@@ -84,8 +96,8 @@ const ProfileCard = ({ userId }: { userId: string }) => {
                             src={eye}
                             alt="eye"
                         />
-                        {data?.profileViews}
-                        {data?.profileViews === 1
+                        {user?.profileViews}
+                        {user?.profileViews === 1
                             ? " profile view"
                             : " profile views"}
                     </p>

@@ -14,6 +14,7 @@ export const Header = () => {
     const queryClient = useQueryClient()
 
     const user = useAuth()
+
     const { setToken } = useAuthStore()
 
     const {
@@ -51,17 +52,36 @@ export const Header = () => {
             <div className="container flex items-center justify-between mx-auto">
                 <Logo />
                 <div className="flex items-center gap-2">
-                    <Link to={`/users/${user?._id}`}>
-                        <Avatar
-                            src={user?.profileImageUrl ?? ""}
-                            alt={"Profile image"}
-                        />
-                    </Link>
+                    {user ? (
+                        <>
+                            <Link to={`/users/${user._id}`}>
+                                <Avatar
+                                    src={user.profileImageUrl ?? ""}
+                                    alt={"Profile image"}
+                                />
+                            </Link>
 
-                    <DropdownMenu
-                        variant="dark"
-                        options={dropdownMenuOptions}
-                    />
+                            <DropdownMenu
+                                variant="dark"
+                                options={dropdownMenuOptions}
+                            />
+                        </>
+                    ) : (
+                        <>
+                            <Link
+                                to={"/signup"}
+                                className="navigation-link"
+                            >
+                                Sign up
+                            </Link>
+                            <Link
+                                to={"/login"}
+                                className="navigation-link navigation-link--inverted"
+                            >
+                                Log in
+                            </Link>
+                        </>
+                    )}
                 </div>
             </div>
         </header>

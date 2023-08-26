@@ -4,6 +4,7 @@ import { ComponentProps } from "react"
 import heartFill from "@/assets/heart-fill.svg"
 import heartOutline from "@/assets/heart-outline.svg"
 import { Button } from "./Button"
+import { useIsLoggedIn } from "@/hooks/useIsLoggedIn"
 
 type LikeButtonProps = ComponentProps<"button"> & {
     liked: boolean
@@ -12,6 +13,7 @@ type LikeButtonProps = ComponentProps<"button"> & {
 
 export const LikeButton = ({ onLike, liked, ...rest }: LikeButtonProps) => {
     const [scope, animate] = useAnimate()
+    const { isLoggedIn } = useIsLoggedIn()
 
     const onLikeClick = () => {
         const hearts = Array.from({ length: 15 })
@@ -70,7 +72,7 @@ export const LikeButton = ({ onLike, liked, ...rest }: LikeButtonProps) => {
             className="relative isolate"
             onClick={(e) => {
                 e.stopPropagation()
-                onLikeClick()
+                isLoggedIn(onLikeClick)
             }}
         >
             {liked ? (

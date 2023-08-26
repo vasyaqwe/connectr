@@ -25,8 +25,7 @@ export const Checkbox = ({
                 onClick={() => onChange(!checked)}
                 data-state={checked ? "checked" : "unchecked"}
                 className="peer h-4 w-4 shrink-0 rounded-[4px] border border-neutral-900 
-     focus-visible:outline-none 
-        focus-visible:outline-accent-300 grid place-content-center
+    focus grid place-content-center
         disabled:cursor-not-allowed 
         disabled:opacity-50 data-[state=checked]:bg-accent-400 data-[state=checked]:border-accent-400"
             >

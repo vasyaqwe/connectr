@@ -8,7 +8,7 @@ import { Skeleton } from "./ui/Skeleton"
 import { ErrorMessage } from "./ui/ErrorMessage"
 import { safeError } from "@/lib/utils"
 import { useAuth } from "@/hooks/useAuth"
-import { DecodedToken, User } from "@/types"
+import { User } from "@/types"
 import { Link } from "react-router-dom"
 import { DotSeparator } from "./ui/DotSeparator"
 import { Tooltip } from "./ui/Tooltip"
@@ -16,23 +16,27 @@ import { Button } from "./ui/Button"
 import { useErrorToast } from "@/hooks/useErrorToast"
 
 const SuggestionsCard = () => {
-    const user = useAuth() as DecodedToken
+    const user = useAuth()
 
     const queryClient = useQueryClient()
 
-    const queryKey = ["users", user._id, "suggestions"]
+    const queryKey = ["users", user?._id, "suggestions"]
 
     const { isLoading, error, data } = useQuery(
         queryKey,
-        () => getUserSuggestions(user._id),
+        () => getUserSuggestions(user!._id),
         {
+            enabled: !!user,
             refetchInterval: 50000,
         }
     )
 
     const { error: connectError, mutate: onToggleConnect } = useMutation(
         (suggestionUserId: string) =>
-            toggleConnect({ userId: user._id, connectionId: suggestionUserId }),
+            toggleConnect({
+                userId: user!._id,
+                connectionId: suggestionUserId,
+            }),
         {
             onMutate: async (suggestionUserId) => {
                 // Stop the queries that may affect this operation
@@ -67,7 +71,7 @@ const SuggestionsCard = () => {
 
     useErrorToast(connectError)
 
-    return (
+    return user ? (
         <div className="hidden xl:block">
             {error ? (
                 <div className="card">
@@ -91,7 +95,10 @@ const SuggestionsCard = () => {
                                     key={suggestedUser._id}
                                     className="flex items-center w-full gap-2"
                                 >
-                                    <Link to={`/users/${suggestedUser._id}`}>
+                                    <Link
+                                        className="focus"
+                                        to={`/users/${suggestedUser._id}`}
+                                    >
                                         <Avatar
                                             src={suggestedUser.profileImageUrl}
                                             alt={suggestedUser.fullName}
@@ -100,14 +107,14 @@ const SuggestionsCard = () => {
                                     <div>
                                         <Link
                                             to={`/users/${suggestedUser._id}`}
-                                            className="block text-lg font-semibold leading-5 hover:underline"
+                                            className="block text-lg font-semibold leading-5 focus hover:underline"
                                         >
                                             {suggestedUser.fullName}
                                         </Link>
                                         <p className="text-sm text-neutral-800">
                                             <Link
                                                 to={`/users/${suggestedUser._id}`}
-                                                className="text-sm text-neutral-800 hover:underline"
+                                                className="text-sm focus text-neutral-800 hover:underline"
                                             >
                                                 @{suggestedUser.username}
                                             </Link>
@@ -160,7 +167,7 @@ const SuggestionsCard = () => {
                 </div>
             )}
         </div>
-    )
+    ) : null
 }
 
 const SuggestionsCardSkeleton = () => {

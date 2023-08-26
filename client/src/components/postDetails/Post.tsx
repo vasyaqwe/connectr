@@ -1,4 +1,4 @@
-import { DecodedToken, Post as PostType } from "@/types"
+import { Post as PostType } from "@/types"
 import { useErrorToast } from "@/hooks/useErrorToast"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { likePost } from "@/api/posts"
@@ -15,7 +15,7 @@ import {
 
 export const Post = forwardRef<HTMLDivElement, { post: PostType }>(
     ({ post }, ref) => {
-        const user = useAuth() as DecodedToken
+        const user = useAuth()
 
         const queryClient = useQueryClient()
 
@@ -61,7 +61,7 @@ export const Post = forwardRef<HTMLDivElement, { post: PostType }>(
 
         const { error: connectError, mutate: onToggleConnect } = useMutation(
             (postUserId: string) =>
-                toggleConnect({ userId: user._id, connectionId: postUserId }),
+                toggleConnect({ userId: user!._id, connectionId: postUserId }),
             {
                 onMutate: async () => {
                     // Stop the queries that may affect this operation
@@ -97,7 +97,7 @@ export const Post = forwardRef<HTMLDivElement, { post: PostType }>(
                 },
                 onSuccess: () => {
                     queryClient.invalidateQueries(queryKey)
-                    queryClient.invalidateQueries(["users", user._id])
+                    queryClient.invalidateQueries(["users", user!._id])
                 },
             }
         )
