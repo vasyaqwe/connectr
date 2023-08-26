@@ -11,13 +11,15 @@ import { isLoggedIn, zParse } from "../middleware"
 import { upload } from "../cloudinary"
 import { postSchema } from "../lib/validations/post"
 
-router.use(isLoggedIn)
-
 router
     .route("/")
     .get(getPosts)
-    .post(upload.single("image"), zParse(postSchema), createPost)
+    .post(isLoggedIn, upload.single("image"), zParse(postSchema), createPost)
 
-router.route("/:id").get(getPost).patch(likePost).delete(deletePost)
+router
+    .route("/:id")
+    .get(getPost)
+    .patch(isLoggedIn, likePost)
+    .delete(isLoggedIn, deletePost)
 
 export default router

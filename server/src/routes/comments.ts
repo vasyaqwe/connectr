@@ -9,13 +9,14 @@ import {
 import { isLoggedIn, zParse } from "../middleware"
 import { commentSchema } from "../lib/validations/comment"
 
-router.use(isLoggedIn)
-
 router
     .route("/")
     .get(getPostComments)
-    .post(zParse(commentSchema), createComment)
+    .post(isLoggedIn, zParse(commentSchema), createComment)
 
-router.route("/:commentId").patch(likeComment).delete(deleteComment)
+router
+    .route("/:commentId")
+    .patch(isLoggedIn, likeComment)
+    .delete(isLoggedIn, deleteComment)
 
 export default router
