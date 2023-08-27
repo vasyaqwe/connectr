@@ -49,7 +49,7 @@ export const Login = () => {
     }
 
     return (
-        <div className="min-h-screen px-4 pt-8 md:pt-28 ">
+        <div className="px-4 pt-20 md:pt-36">
             <div className="flex items-center justify-center gap-4 mb-8">
                 <img
                     src={logo}
@@ -70,7 +70,7 @@ export const Login = () => {
                         safeOnSubmit()
                     }}
                 >
-                    <div className="mt-3">
+                    <div>
                         <label
                             className="font-medium mb-[2px] inline-block"
                             htmlFor="email"

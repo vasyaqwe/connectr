@@ -10,7 +10,7 @@ export const Shell = ({ className = "", children, ...rest }: ShellProps) => {
         <div
             {...rest}
             className={cn(
-                `grid gap-4 lg:grid-cols-[40%,1fr] md:gap-6 xl:grid-cols-[30%,1fr,25%] items-start`,
+                `grid mt-8 gap-4 lg:grid-cols-[40%,1fr] md:gap-6 xl:grid-cols-[30%,1fr,25%] items-start`,
                 className
             )}
         >
