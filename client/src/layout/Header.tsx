@@ -1,6 +1,6 @@
 import { Avatar } from "@/components/ui/Avatar"
 import { DropdownMenu, DropdownMenuOptions } from "@/components/ui/DropdownMenu"
-import { Logo } from "@/components/Logo"
+import { LogoLink } from "@/components/LogoLink"
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import { useErrorToast } from "@/hooks/useErrorToast"
 import { useAuthStore } from "@/stores/useAuthStore"
@@ -50,7 +50,7 @@ export const Header = () => {
     return (
         <header className="sticky top-0 z-10 py-4 shadow-md bg-neutral-100">
             <div className="container flex items-center justify-between mx-auto">
-                <Logo />
+                <LogoLink />
                 <div className="flex items-center gap-2">
                     {user ? (
                         <>

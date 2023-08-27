@@ -23,7 +23,7 @@ export const Dialog = ({ title, header, children, open }: DialogProps) => {
                 />
                 <motion.dialog
                     open
-                    className="w-full z-[99] max-w-lg border border-neutral-200 p-10 m-auto inset-0 rounded-md fixed"
+                    className="w-[90%] z-[99] max-w-lg border border-accent-300 p-10 m-auto inset-0 rounded-md fixed"
                     animate={{ opacity: 1, y: 0 }}
                     initial={{ opacity: 0, y: 10 }}
                     transition={{ ease: "easeInOut", duration: 0.25 }}

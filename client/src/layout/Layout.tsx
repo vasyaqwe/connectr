@@ -7,7 +7,6 @@ import { CreateAccountDialog } from "@/components/dialogs/CreateAccountDialog"
 
 export const Layout = () => {
     const { dialogs } = useStore()
-
     useEffect(() => {
         if (Object.values(dialogs).some((v) => v)) {
             document.body.style.overflow = "hidden"
