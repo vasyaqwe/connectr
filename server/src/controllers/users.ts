@@ -86,8 +86,14 @@ export const getUserSuggestions = async (req: Request, res: Response) => {
                     !user.connections.some((existingConnection) =>
                         existingConnection.equals(suggestedConnection._id)
                     ) &&
-                    !suggestedConnection.equals(user._id)
+                    !suggestedConnection.equals(user._id) &&
+                    !suggestions.some(
+                        (s) =>
+                            s._id.toString() ===
+                            suggestedConnection._id.toString()
+                    )
                 ) {
+                    console.log(suggestions, suggestedConnection._id)
                     suggestions.push(suggestedConnection)
                 }
             }
