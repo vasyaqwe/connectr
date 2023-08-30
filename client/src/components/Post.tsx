@@ -29,34 +29,34 @@ const PostSkeleton = () => {
     const isOnPostDetailPage = pathname.includes("posts")
 
     return (
-        <Skeleton className="gap-3 md:max-w-full card rounded-2xl">
+        <Skeleton className="card gap-3 rounded-2xl md:max-w-full">
             <header className="flex items-center gap-2">
                 <AvatarSkeleton />
                 <div>
                     <span>
-                        <Skeleton className="h-2 w-[8rem] inline-block" />
+                        <Skeleton className="inline-block h-2 w-[8rem]" />
                         <DotSeparator className="mr-1" />
-                        <Skeleton className="h-2 w-[5rem] inline-block" />
+                        <Skeleton className="inline-block h-2 w-[5rem]" />
                     </span>{" "}
                     <br />
                     <span className="text-sm text-neutral-800">
-                        <Skeleton className="h-2 w-[5rem] inline-block" />
+                        <Skeleton className="inline-block h-2 w-[5rem]" />
                         <DotSeparator className="ml-2 mr-0" />{" "}
                         <img
-                            className="inline mb-1 mr-1"
+                            className="mb-1 mr-1 inline"
                             src={location}
                             alt="location"
                         />
-                        <Skeleton className="h-2 w-[4rem] inline-block" />
+                        <Skeleton className="inline-block h-2 w-[4rem]" />
                     </span>
                 </div>
             </header>
 
-            <Skeleton className="w-full h-2 mt-4" />
+            <Skeleton className="mt-4 h-2 w-full" />
             <Skeleton className="h-2 w-[90%]" />
             <Skeleton className="h-2 w-[80%]" />
 
-            <div className="flex items-center mt-5">
+            <div className="mt-5 flex items-center">
                 <img
                     src={heartFill}
                     alt="heart"
@@ -64,7 +64,7 @@ const PostSkeleton = () => {
                 <span className="mr-auto">
                     {" "}
                     <DotSeparator />{" "}
-                    <Skeleton className="h-2 w-[2rem] inline-block" />
+                    <Skeleton className="inline-block h-2 w-[2rem]" />
                 </span>
                 <Skeleton className="h-2 w-[2rem]" />
                 <DotSeparator className="mr-1" />
@@ -148,15 +148,15 @@ const PostHeader = ({
                         <Link
                             onClick={(e) => e.stopPropagation()}
                             to={`/users/${post.user._id}`}
-                            className="hidden focus sm:inline-block hover:underline"
+                            className="focus hidden hover:underline sm:inline-block"
                         >
                             {post.user.fullName}
                         </Link>
-                        <DotSeparator className="hidden mr-1 sm:inline-block" />
+                        <DotSeparator className="mr-1 hidden sm:inline-block" />
                         <Link
                             onClick={(e) => e.stopPropagation()}
                             to={`/users/${post.user._id}`}
-                            className="font-light focus sm:text-neutral-800 hover:underline"
+                            className="focus font-light hover:underline sm:text-neutral-800"
                         >
                             @{post.user.username}
                         </Link>
@@ -165,7 +165,7 @@ const PostHeader = ({
                         {formatRelativeDate(post.createdAt)}{" "}
                         <DotSeparator className="m-0" />{" "}
                         <img
-                            className="inline mb-1 mr-1"
+                            className="mb-1 mr-1 inline"
                             src={location}
                             alt="location"
                         />

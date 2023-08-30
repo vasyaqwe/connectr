@@ -24,14 +24,14 @@ export const Checkbox = ({
                 id={id}
                 onClick={() => onChange(!checked)}
                 data-state={checked ? "checked" : "unchecked"}
-                className="peer h-4 w-4 shrink-0 rounded-[4px] border border-neutral-900 
-    focus grid place-content-center
+                className="focus peer grid h-4 w-4 shrink-0 place-content-center 
+    rounded-[4px] border border-neutral-900
         disabled:cursor-not-allowed 
-        disabled:opacity-50 data-[state=checked]:bg-accent-400 data-[state=checked]:border-accent-400"
+        disabled:opacity-50 data-[state=checked]:border-accent-400 data-[state=checked]:bg-accent-400"
             >
                 {checked && (
                     <svg
-                        className={`w-[10px] h-[10px] rounded-[3px] pointer-events-none`}
+                        className={`pointer-events-none h-[10px] w-[10px] rounded-[3px]`}
                         version="1.1"
                         viewBox="0 0 17 12"
                         xmlns="http://www.w3.org/2000/svg"

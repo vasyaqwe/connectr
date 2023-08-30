@@ -23,7 +23,7 @@ export const Spinner = ({
 
     return (
         <div
-            className={cn("animate-spin mr-1 h-5 w-5", className)}
+            className={cn("mr-1 h-5 w-5 animate-spin", className)}
             role="status"
         >
             <svg

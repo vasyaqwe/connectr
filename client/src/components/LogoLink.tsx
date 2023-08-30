@@ -4,14 +4,14 @@ import logo from "@/assets/logo.svg"
 export const LogoLink = () => {
     return (
         <Link
-            className="flex items-center gap-3 rounded-md focus-visible:outline outline-2 outline-accent-300"
+            className="flex items-center gap-3 rounded-md outline-2 outline-accent-300 focus-visible:outline"
             to={"/"}
         >
             <img
                 src={logo}
                 alt="Connectr"
             />
-            <p className="text-3xl font-semibold gradient-text">Connectr</p>
+            <p className="gradient-text text-3xl font-semibold">Connectr</p>
         </Link>
     )
 }

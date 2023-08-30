@@ -135,19 +135,19 @@ export const SignUp = () => {
 
     return (
         <div className="px-4 pt-20 md:pt-36">
-            <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="mb-8 flex items-center justify-center gap-4">
                 <img
                     src={logo}
                     alt="Connectr"
                 />
-                <h1 className="text-5xl font-semibold text-center gradient-text">
+                <h1 className="gradient-text text-center text-5xl font-semibold">
                     Connectr
                 </h1>
             </div>
-            <h2 className="text-3xl font-semibold text-center sm:text-4xl">
+            <h2 className="text-center text-3xl font-semibold sm:text-4xl">
                 Create an account
             </h2>
-            <div className="mt-10 overflow-hidden card">
+            <div className="card mt-10 overflow-hidden">
                 <motion.form
                     className="flex flex-col gap-4"
                     animate={{ height: height }}

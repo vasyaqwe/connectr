@@ -94,7 +94,7 @@ export const Home = () => {
                         })
                     )}
                     {isFetchingNextPage && (
-                        <Spinner className="self-center mt-3" />
+                        <Spinner className="mt-3 self-center" />
                     )}
                 </div>
             )}

@@ -16,7 +16,7 @@ export const CreateAccountDialog = () => {
                         src={logo}
                         alt="Connectr"
                     />
-                    <p className="text-5xl font-semibold gradient-text">
+                    <p className="gradient-text text-5xl font-semibold">
                         Connectr
                     </p>
                 </div>
@@ -24,11 +24,11 @@ export const CreateAccountDialog = () => {
             title={"You need to be logged in."}
             open={dialogs.createAccount}
         >
-            <p className="text-lg font-medium text-center">
+            <p className="text-center text-lg font-medium">
                 {" "}
                 Create an account or log in now to start connecting.
             </p>
-            <div className="flex justify-center gap-4 mt-5">
+            <div className="mt-5 flex justify-center gap-4">
                 <Button
                     role="link"
                     onClick={() => {

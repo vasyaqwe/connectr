@@ -42,12 +42,12 @@ export const Tooltip = ({
             onMouseEnter={onMouseEnter} // Clear timeout on mouse enter
         >
             <p
-                className={`border text-sm absolute bottom-[110%] -translate-x-1/2 left-1/2 w-max border-neutral-500 py-2 px-3 
-                rounded-md bg-neutral-50 transition-all shadow-md
+                className={`absolute bottom-[110%] left-1/2 w-max -translate-x-1/2 rounded-md border border-neutral-500 bg-neutral-50 px-3 
+                py-2 text-sm shadow-md transition-all
                 ${
                     visible
-                        ? "pointer-events-auto opacity-100 scale-100 translate-y-0"
-                        : "pointer-events-none opacity-0 scale-90 translate-y-1"
+                        ? "pointer-events-auto translate-y-0 scale-100 opacity-100"
+                        : "pointer-events-none translate-y-1 scale-90 opacity-0"
                 }
             `}
             >

@@ -83,7 +83,7 @@ export const UserProfile = () => {
                     <button
                         role="link"
                         onClick={() => navigate(-1)}
-                        className="flex items-center gap-1 link w-fit"
+                        className="link flex w-fit items-center gap-1"
                     >
                         <img
                             className="rotate-180"
@@ -126,7 +126,7 @@ export const UserProfile = () => {
                         })
                     )}
                     {isFetchingNextPage && (
-                        <Spinner className="self-center mt-3" />
+                        <Spinner className="mt-3 self-center" />
                     )}
                 </div>
             )}

@@ -29,11 +29,11 @@ export const UsernameStep = ({
                     type="text"
                 />
             </div>
-            <div className="flex flex-col items-center gap-3 mt-3">
+            <div className="mt-3 flex flex-col items-center gap-3">
                 <Button
                     isLoading={isLoading}
                     disabled={isLoading}
-                    className={`justify-center w-full`}
+                    className={`w-full justify-center`}
                     arrow={"next"}
                 >
                     Next
@@ -41,7 +41,7 @@ export const UsernameStep = ({
                 <Button
                     type="button"
                     onClick={onBack}
-                    className={`justify-center w-full`}
+                    className={`w-full justify-center`}
                     arrow={"back"}
                 >
                     Back

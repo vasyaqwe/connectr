@@ -15,8 +15,8 @@ export const Input = ({ invalid, className = "", ...rest }: InputProps) => {
         <>
             <input
                 className={cn(
-                    `input block border bg-primary-800 
-                        rounded-md py-2 px-3 text-neutral-900 
+                    `input bg-primary-800 block rounded-md 
+                        border px-3 py-2 text-neutral-900 
                 ${
                     invalid
                         ? " outline outline-[2px] outline-offset-2 outline-danger-400"
@@ -29,7 +29,7 @@ export const Input = ({ invalid, className = "", ...rest }: InputProps) => {
                 {...rest}
             />
             {invalid && invalid !== "nomessage" && (
-                <p className={`text-danger-400 mt-1`}>{invalid}</p>
+                <p className={`mt-1 text-danger-400`}>{invalid}</p>
             )}
         </>
     )

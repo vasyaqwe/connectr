@@ -23,13 +23,13 @@ export const Dialog = ({ title, header, children, open }: DialogProps) => {
                 />
                 <motion.dialog
                     open
-                    className="w-[90%] z-[99] max-w-lg border border-accent-300 p-10 m-auto inset-0 rounded-md fixed"
+                    className="fixed inset-0 z-[99] m-auto w-[90%] max-w-lg rounded-md border border-accent-300 p-10"
                     animate={{ opacity: 1, y: 0 }}
                     initial={{ opacity: 0, y: 10 }}
                     transition={{ ease: "easeInOut", duration: 0.25 }}
                 >
                     {header && header}
-                    <h2 className="mt-5 mb-4 text-2xl font-semibold text-center">
+                    <h2 className="mb-4 mt-5 text-center text-2xl font-semibold">
                         {title}
                     </h2>
                     {children}

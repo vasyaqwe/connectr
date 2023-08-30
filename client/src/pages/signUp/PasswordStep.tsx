@@ -47,18 +47,18 @@ export const PasswordStep = ({
                     type="password"
                 />
             </div>
-            <div className="flex flex-col items-center gap-3 mt-3">
+            <div className="mt-3 flex flex-col items-center gap-3">
                 <Button
                     isLoading={isLoading}
                     disabled={isLoading}
-                    className={`justify-center  w-full`}
+                    className={`w-full  justify-center`}
                 >
                     Sign up
                 </Button>
                 <Button
                     type="button"
                     onClick={onBack}
-                    className={`justify-center  w-full`}
+                    className={`w-full  justify-center`}
                     arrow={"back"}
                 >
                     Back

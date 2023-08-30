@@ -44,12 +44,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 ref={ref}
                 {...rest}
                 className={cn(
-                    `rounded-md border font-medium transition duration-100 ease-out focus group
+                    `focus group rounded-md border font-medium transition duration-100 ease-out
             ${variantLookup[variant]}
             ${arrow ? "min-w-[7rem]" : ""}
              disabled:opacity-70 
             ${
-                isLoading ? "opacity-80 cursor-default" : ""
+                isLoading ? "cursor-default opacity-80" : ""
             } flex items-center gap-2
             `,
                     className
@@ -59,7 +59,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                 <span className="relative flex h-[21px] items-center gap-2">
                     {arrow === "back" && (
                         <img
-                            className="absolute transition-all rotate-180 -translate-y-1/2 opacity-0 top-1/2 -left-4 group-hover:-left-6 group-hover:opacity-100"
+                            className="absolute -left-4 top-1/2 -translate-y-1/2 rotate-180 opacity-0 transition-all group-hover:-left-6 group-hover:opacity-100"
                             src={arrowIcon}
                             alt="arrow forwards"
                         />
@@ -67,7 +67,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
                     {children}
                     {arrow === "next" && (
                         <img
-                            className="absolute transition-all -translate-y-1/2 opacity-0 top-1/2 -right-4 group-hover:-right-6 group-hover:opacity-100"
+                            className="absolute -right-4 top-1/2 -translate-y-1/2 opacity-0 transition-all group-hover:-right-6 group-hover:opacity-100"
                             src={arrowIcon}
                             alt="arrow forwards"
                         />

@@ -85,7 +85,7 @@ export const NewPost = () => {
                         }))
                     }
                     name="body"
-                    className="w-full min-h-[5rem]"
+                    className="min-h-[5rem] w-full"
                     placeholder="Share what's on your mind..."
                 ></Textarea>
                 <div className="flex items-end justify-between">
@@ -116,7 +116,7 @@ export const NewPost = () => {
                     <Button
                         disabled={isLoading || formData.body.trim().length < 1}
                         isLoading={isLoading}
-                        className="mt-3 ml-auto"
+                        className="ml-auto mt-3"
                     >
                         Post
                     </Button>

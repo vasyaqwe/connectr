@@ -48,8 +48,8 @@ export const Header = () => {
     ]
 
     return (
-        <header className="sticky top-0 z-10 py-4 shadow-md bg-neutral-100">
-            <div className="container flex items-center justify-between mx-auto">
+        <header className="sticky top-0 z-10 bg-neutral-100 py-4 shadow-md">
+            <div className="container mx-auto flex items-center justify-between">
                 <LogoLink />
                 <div className="flex items-center gap-2">
                     {user ? (

@@ -50,19 +50,19 @@ export const Login = () => {
 
     return (
         <div className="px-4 pt-20 md:pt-36">
-            <div className="flex items-center justify-center gap-4 mb-8">
+            <div className="mb-8 flex items-center justify-center gap-4">
                 <img
                     src={logo}
                     alt="Connectr "
                 />
-                <h1 className="text-5xl font-semibold text-center gradient-text">
+                <h1 className="gradient-text text-center text-5xl font-semibold">
                     Connectr
                 </h1>
             </div>
-            <h2 className="text-3xl font-semibold text-center sm:text-4xl">
+            <h2 className="text-center text-3xl font-semibold sm:text-4xl">
                 Welcome back.
             </h2>
-            <div className="mt-10 card">
+            <div className="card mt-10">
                 <form
                     className="flex flex-col gap-4"
                     onSubmit={(e) => {
@@ -72,7 +72,7 @@ export const Login = () => {
                 >
                     <div>
                         <label
-                            className="font-medium mb-[2px] inline-block"
+                            className="mb-[2px] inline-block font-medium"
                             htmlFor="email"
                         >
                             Email
@@ -88,7 +88,7 @@ export const Login = () => {
                             type="text"
                         />
                         <label
-                            className="font-medium mb-[2px] mt-3 inline-block"
+                            className="mb-[2px] mt-3 inline-block font-medium"
                             htmlFor="password"
                         >
                             Password

@@ -24,7 +24,7 @@ export const Layout = () => {
             {!isOnAuthPage && <Header />}
             <CreateAccountDialog />
             <main className="container mx-auto">
-                <p className="fixed z-[40] w-max text-center p-2 text-xs sm:text-sm -translate-x-1/2 border rounded-md bg-secondary-100 border-secondary-400 bottom-4 left-1/2">
+                <p className="fixed bottom-4 left-1/2 z-[40] w-max -translate-x-1/2 rounded-md border border-secondary-400 bg-secondary-100 p-2 text-center text-xs sm:text-sm">
                     Created by{" "}
                     <Link
                         className="link"

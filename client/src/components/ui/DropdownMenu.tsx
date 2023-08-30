@@ -98,10 +98,10 @@ export const DropdownMenu = ({
                     setHighlightedIdx(undefined)
                 }
             }}
-            className={`relative focus:outline-none cursor-default
-            rounded-md w-8 h-8
-                 grid place-items-center
-                 transition-colors ${variantLookup[variant]} `}
+            className={`relative grid h-8
+            w-8 cursor-default place-items-center
+                 rounded-md transition-colors
+                 focus:outline-none ${variantLookup[variant]} `}
             aria-expanded={open}
             onClick={(e) => {
                 e.stopPropagation()
@@ -116,12 +116,12 @@ export const DropdownMenu = ({
                 role="menu"
                 className={`absolute min-w-[9rem] transition-all ${
                     open
-                        ? "opacity-100 scale-100 pointer-events-auto"
-                        : "opacity-0 scale-95 pointer-events-none"
-                } rounded-md top-[110%] ${
+                        ? "pointer-events-auto scale-100 opacity-100"
+                        : "pointer-events-none scale-95 opacity-0"
+                } top-[110%] rounded-md ${
                     alignTo === "left" ? "left-0" : "right-0"
                 }
-                         bg-white border border-neutral-500 p-1`}
+                         border border-neutral-500 bg-white p-1`}
             >
                 {options.map((o, idx) => (
                     <button
@@ -129,16 +129,16 @@ export const DropdownMenu = ({
                         key={idx}
                         disabled={o.isLoading}
                         role="menuitem"
-                        className={`flex cursor-default disabled:opacity-60 items-center justify-between px-2 py-1 w-full focus:outline-none
-            focus:bg-neutral-450 ${
+                        className={`flex w-full cursor-default items-center justify-between px-2 py-1 focus:bg-neutral-450 focus:outline-none
+            disabled:opacity-60 ${
                 highlightedIdx === idx ? "bg-neutral-450" : ""
             }
-            rounded-[.3rem] transition-colors hover:bg-neutral-450 gap-2`}
+            gap-2 rounded-[.3rem] transition-colors hover:bg-neutral-450`}
                     >
                         {o.component}
                         {o.isLoading && (
                             <Spinner
-                                className="w-4 h-4"
+                                className="h-4 w-4"
                                 variant="neutral"
                             />
                         )}

@@ -34,7 +34,7 @@ export const PostDetails = () => {
             <div className="grid gap-3 pb-8">
                 <Link
                     to={"/"}
-                    className="flex items-center gap-1 link w-fit"
+                    className="link flex w-fit items-center gap-1"
                 >
                     <img
                         className="rotate-180"

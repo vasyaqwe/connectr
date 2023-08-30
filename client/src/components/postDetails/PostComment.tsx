@@ -212,7 +212,7 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
         return (
             <div
                 ref={ref}
-                className="max-w-full gap-4 p-3 shadow-none card rounded-xl md:p-5 from-white to-white"
+                className="card max-w-full gap-4 rounded-xl from-white to-white p-3 shadow-none md:p-5"
             >
                 <header className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-2">
@@ -226,14 +226,14 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
                             <p className="font-bold leading-5">
                                 <Link
                                     to={`/users/${comment.user._id}`}
-                                    className="hidden sm:inline-block hover:underline"
+                                    className="hidden hover:underline sm:inline-block"
                                 >
                                     {comment.user.fullName}
                                 </Link>
-                                <DotSeparator className="hidden mr-1 sm:inline-block" />
+                                <DotSeparator className="mr-1 hidden sm:inline-block" />
                                 <Link
                                     to={`/users/${comment.user._id}`}
-                                    className="text-sm sm:text-neutral-800 sm:font-light hover:underline"
+                                    className="text-sm hover:underline sm:font-light sm:text-neutral-800"
                                 >
                                     @{comment.user.username}
                                 </Link>
@@ -242,7 +242,7 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
                                 {formatRelativeDate(comment.createdAt)}{" "}
                                 <DotSeparator className="m-0" />{" "}
                                 <img
-                                    className="inline mb-1 mr-1"
+                                    className="mb-1 mr-1 inline"
                                     src={location}
                                     alt="location"
                                 />
@@ -303,33 +303,33 @@ const PostComment = forwardRef<HTMLDivElement, PostCommentProps>(
 
 const PostCommentSkeleton = () => {
     return (
-        <Skeleton className="max-w-full gap-2 p-5 shadow-none card rounded-xl from-white to-white">
+        <Skeleton className="card max-w-full gap-2 rounded-xl from-white to-white p-5 shadow-none">
             <header className="flex items-center gap-2">
                 <AvatarSkeleton />
                 <div>
                     <span>
-                        <Skeleton className="h-2 w-[8rem] inline-block" />
+                        <Skeleton className="inline-block h-2 w-[8rem]" />
                         <DotSeparator className="mr-1" />
-                        <Skeleton className="h-2 w-[5rem] inline-block" />
+                        <Skeleton className="inline-block h-2 w-[5rem]" />
                     </span>{" "}
                     <br />
                     <span className="text-sm text-neutral-800">
-                        <Skeleton className="h-2 w-[5rem] inline-block" />
+                        <Skeleton className="inline-block h-2 w-[5rem]" />
                         <DotSeparator className="ml-2 mr-0" />{" "}
                         <img
-                            className="inline mb-1 mr-1"
+                            className="mb-1 mr-1 inline"
                             src={location}
                             alt="location"
                         />
-                        <Skeleton className="h-2 w-[4rem] inline-block" />
+                        <Skeleton className="inline-block h-2 w-[4rem]" />
                     </span>
                 </div>
             </header>
 
-            <Skeleton className="w-full h-2 mt-4" />
+            <Skeleton className="mt-4 h-2 w-full" />
             <Skeleton className="h-2 w-[90%]" />
 
-            <div className="flex items-center mt-5">
+            <div className="mt-5 flex items-center">
                 <img
                     src={heartFill}
                     alt="heart"
@@ -337,7 +337,7 @@ const PostCommentSkeleton = () => {
                 <span className="mr-auto">
                     {" "}
                     <DotSeparator />{" "}
-                    <Skeleton className="h-2 w-[2rem] inline-block" />
+                    <Skeleton className="inline-block h-2 w-[2rem]" />
                 </span>
             </div>
         </Skeleton>

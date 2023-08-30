@@ -38,8 +38,8 @@ export const GoogleLoginButton = () => {
     return (
         <button
             type="button"
-            className="rounded-md flex items-center shadow-md hover:shadow-sm transition-shadow focus
-            font-medium border border-transparent bg-white text-neutral-900 justify-center gap-[24px] px-[8px] py-2"
+            className="focus flex items-center justify-center gap-[24px] rounded-md border
+            border-transparent bg-white px-[8px] py-2 font-medium text-neutral-900 shadow-md transition-shadow hover:shadow-sm"
             onClick={() => login()}
         >
             <img

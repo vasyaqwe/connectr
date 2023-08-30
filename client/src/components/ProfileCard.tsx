@@ -22,7 +22,7 @@ const ProfileCard = ({ userId }: { userId: string | undefined }) => {
     const user = userId ? data : guestUser
 
     return (
-        <div className="sticky hidden top-[6rem] lg:block">
+        <div className="sticky top-[6rem] hidden lg:block">
             {error ? (
                 <div className="card">
                     <ErrorMessage message={safeError(error)} />
@@ -30,7 +30,7 @@ const ProfileCard = ({ userId }: { userId: string | undefined }) => {
             ) : isLoading && fetchStatus !== "idle" ? (
                 <ProfileCardSkeleton />
             ) : (
-                <div className="items-start card ">
+                <div className="card items-start ">
                     <div className="flex items-center gap-2">
                         {user?._id === "guest" ? (
                             <Avatar
@@ -52,13 +52,13 @@ const ProfileCard = ({ userId }: { userId: string | undefined }) => {
                         <div>
                             <Link
                                 to={`/users/${userId}`}
-                                className="block text-lg font-semibold leading-5 focus hover:underline"
+                                className="focus block text-lg font-semibold leading-5 hover:underline"
                             >
                                 {user?.fullName}
                             </Link>
                             <Link
                                 to={`/users/${userId}`}
-                                className="text-sm focus text-neutral-800 hover:underline"
+                                className="focus text-sm text-neutral-800 hover:underline"
                             >
                                 @{user?.username}
                             </Link>
@@ -109,12 +109,12 @@ const ProfileCard = ({ userId }: { userId: string | undefined }) => {
 
 const ProfileCardSkeleton = () => {
     return (
-        <Skeleton className="gap-3 card rounded-2xl">
-            <div className="flex items-center gap-3 mb-4">
+        <Skeleton className="card gap-3 rounded-2xl">
+            <div className="mb-4 flex items-center gap-3">
                 <AvatarSkeleton />
                 <div>
-                    <Skeleton className="w-[10rem] mb-3 h-3 " />
-                    <Skeleton className="w-[7rem] h-3 " />
+                    <Skeleton className="mb-3 h-3 w-[10rem] " />
+                    <Skeleton className="h-3 w-[7rem] " />
                 </div>
             </div>
             <div className="flex items-end gap-2">
@@ -122,7 +122,7 @@ const ProfileCardSkeleton = () => {
                     src={location}
                     alt="location"
                 />
-                <Skeleton className="w-[10rem] h-3 " />
+                <Skeleton className="h-3 w-[10rem] " />
             </div>
             <div className="flex items-start gap-2">
                 <img
@@ -131,8 +131,8 @@ const ProfileCardSkeleton = () => {
                     alt="bio"
                 />
                 <div className="w-full">
-                    <Skeleton className="w-full h-3 mb-2" />
-                    <Skeleton className="w-[80%] h-3 " />
+                    <Skeleton className="mb-2 h-3 w-full" />
+                    <Skeleton className="h-3 w-[80%] " />
                 </div>
             </div>
             <div className="flex items-center gap-2">
@@ -140,14 +140,14 @@ const ProfileCardSkeleton = () => {
                     src={link}
                     alt="link"
                 />
-                <Skeleton className="w-[10rem] h-3 " />
+                <Skeleton className="h-3 w-[10rem] " />
             </div>
             <div className="flex items-center gap-2">
                 <img
                     src={eye}
                     alt="eye"
                 />
-                <Skeleton className="w-[10rem] h-3 " />
+                <Skeleton className="h-3 w-[10rem] " />
             </div>
         </Skeleton>
     )

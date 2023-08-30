@@ -80,7 +80,7 @@ const SuggestionsCard = () => {
             ) : isLoading ? (
                 <SuggestionsCardSkeleton />
             ) : (
-                <div className="items-start card ">
+                <div className="card items-start ">
                     <h2 className="text-xl font-semibold">Suggestions</h2>
                     {data!.length < 1 ? (
                         <p className="text-sm">
@@ -93,7 +93,7 @@ const SuggestionsCard = () => {
                             return (
                                 <div
                                     key={suggestedUser._id}
-                                    className="flex items-center w-full gap-2"
+                                    className="flex w-full items-center gap-2"
                                 >
                                     <Link
                                         className="focus"
@@ -107,20 +107,20 @@ const SuggestionsCard = () => {
                                     <div>
                                         <Link
                                             to={`/users/${suggestedUser._id}`}
-                                            className="block text-lg font-semibold leading-5 focus hover:underline"
+                                            className="focus block text-lg font-semibold leading-5 hover:underline"
                                         >
                                             {suggestedUser.fullName}
                                         </Link>
                                         <p className="text-sm text-neutral-800">
                                             <Link
                                                 to={`/users/${suggestedUser._id}`}
-                                                className="text-sm focus text-neutral-800 hover:underline"
+                                                className="focus text-sm text-neutral-800 hover:underline"
                                             >
                                                 @{suggestedUser.username}
                                             </Link>
                                             <DotSeparator className="" />{" "}
                                             <img
-                                                className="inline mb-1 mr-1"
+                                                className="mb-1 mr-1 inline"
                                                 src={location}
                                                 alt="location"
                                             />
@@ -172,8 +172,8 @@ const SuggestionsCard = () => {
 
 const SuggestionsCardSkeleton = () => {
     return (
-        <Skeleton className="gap-3 md:max-w-full card rounded-2xl">
-            <Skeleton className="h-5 w-[8rem] inline-block" />
+        <Skeleton className="card gap-3 rounded-2xl md:max-w-full">
+            <Skeleton className="inline-block h-5 w-[8rem]" />
             <SuggestionsCardSkeletonItem />
             <SuggestionsCardSkeletonItem />
             <SuggestionsCardSkeletonItem />
@@ -187,20 +187,20 @@ const SuggestionsCardSkeletonItem = () => {
         <div className="flex items-center gap-2">
             <AvatarSkeleton />
             <div>
-                <Skeleton className="h-2 w-[8rem] inline-block" />
+                <Skeleton className="inline-block h-2 w-[8rem]" />
                 <br />
                 <span className="text-sm text-neutral-800">
-                    <Skeleton className="h-2 w-[4rem] inline-block" />
+                    <Skeleton className="inline-block h-2 w-[4rem]" />
                     <DotSeparator className="ml-2 mr-0" />{" "}
                     <img
-                        className="inline mb-1 mr-1"
+                        className="mb-1 mr-1 inline"
                         src={location}
                         alt="location"
                     />
-                    <Skeleton className="h-2 w-[4rem] inline-block" />
+                    <Skeleton className="inline-block h-2 w-[4rem]" />
                 </span>
             </div>
-            <Skeleton className="w-8 h-8 ml-auto rounded-md" />
+            <Skeleton className="ml-auto h-8 w-8 rounded-md" />
         </div>
     )
 }

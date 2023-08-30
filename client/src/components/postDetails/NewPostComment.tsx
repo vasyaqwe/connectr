@@ -52,7 +52,7 @@ const NewPostComment = ({ post }: { post: Post }) => {
                 e.preventDefault()
                 isLoggedIn(onPostComment)
             }}
-            className="relative pt-5 border-t border-neutral-600"
+            className="relative border-t border-neutral-600 pt-5"
         >
             <Textarea
                 id="new-post-comment"
@@ -62,13 +62,13 @@ const NewPostComment = ({ post }: { post: Post }) => {
                     setFormData((prev) => ({ ...prev, body: e.target.value }))
                 }
                 ref={commentRef}
-                className="w-full min-h-[7rem]"
+                className="min-h-[7rem] w-full"
                 placeholder="Post a comment"
             ></Textarea>
             <Button
                 disabled={postCommentLoading || formData.body.trim().length < 1}
                 isLoading={postCommentLoading}
-                className="absolute mt-3 ml-auto bottom-3 right-3"
+                className="absolute bottom-3 right-3 ml-auto mt-3"
             >
                 Post
             </Button>
@@ -78,7 +78,7 @@ const NewPostComment = ({ post }: { post: Post }) => {
 
 const NewPostCommentSkeleton = () => {
     return (
-        <Skeleton className="max-w-full border-neutral-200 card rounded-lg min-h-[7rem] shadow-none p-5 from-white to-white" />
+        <Skeleton className="card min-h-[7rem] max-w-full rounded-lg border-neutral-200 from-white to-white p-5 shadow-none" />
     )
 }
 export { NewPostComment, NewPostCommentSkeleton }

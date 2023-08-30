@@ -15,15 +15,15 @@ export const Toast = () => {
     return (
         <p
             aria-hidden={!toast.open}
-            className={`py-3 px-6 rounded-md w-[min(90%,500px)] text-center sm:w-fit mx-auto z-[99] fixed left-1/2 -translate-x-1/2 top-5 -translate-y-[300%] border ${
+            className={`fixed left-1/2 top-5 z-[99] mx-auto w-[min(90%,500px)] -translate-x-1/2 -translate-y-[300%] rounded-md border px-6 py-3 text-center sm:w-fit ${
                 toast.open ? "translate-y-0" : ""
             }
         transition-all
         ${toast.alert ? "alert" : ""} ${
-                toast.error
-                    ? "bg-danger-50 border-danger-400"
-                    : "bg-accent-100 border-accent-400"
-            }`}
+            toast.error
+                ? "border-danger-400 bg-danger-50"
+                : "border-accent-400 bg-accent-100"
+        }`}
         >
             {toast.text}
         </p>

@@ -82,7 +82,7 @@ export const Select = ({
     return (
         <div
             tabIndex={0}
-            className="relative flex items-center justify-between w-full px-3 py-2 text-white border rounded-md cursor-pointer border-primary-600 focus:outline-none focus:border-accent-400 bg-primary-800"
+            className="border-primary-600 bg-primary-800 relative flex w-full cursor-pointer items-center justify-between rounded-md border px-3 py-2 text-white focus:border-accent-400 focus:outline-none"
             aria-expanded={open}
             ref={ref}
             onClick={() => setOpen((prev) => !prev)}
@@ -109,7 +109,7 @@ export const Select = ({
                 className={`${open ? "rotate-90" : "-rotate-90"}`}
             />
             <ul
-                className={`z-10 rounded-md absolute top-[110%] w-full left-0 border border-primary-600 bg-primary-800 ${
+                className={`border-primary-600 bg-primary-800 absolute left-0 top-[110%] z-10 w-full rounded-md border ${
                     open ? "block" : "hidden"
                 } `}
             >
@@ -118,7 +118,7 @@ export const Select = ({
                         key={idx}
                         onClick={() => onSelect(option)}
                         onMouseEnter={() => setHighlightedIdx(idx)}
-                        className={`cursor-pointer hover:bg-accent-400 p-2 ${
+                        className={`cursor-pointer p-2 hover:bg-accent-400 ${
                             optionSelected(option) ? "bg-accent-700" : ""
                         }
                         ${idx === highlightedIdx ? "bg-accent-400 " : ""}

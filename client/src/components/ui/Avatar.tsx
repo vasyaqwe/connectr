@@ -5,13 +5,13 @@ const Avatar = ({ src, alt = "" }: { src: string; alt: string }) => {
         <img
             src={src}
             alt={alt}
-            className="w-10 h-10 border rounded-full border-accent-300"
+            className="h-10 w-10 rounded-full border border-accent-300"
         />
     )
 }
 
 const AvatarSkeleton = () => {
-    return <Skeleton className="w-10 h-10 rounded-full "></Skeleton>
+    return <Skeleton className="h-10 w-10 rounded-full "></Skeleton>
 }
 
 export { Avatar, AvatarSkeleton }
