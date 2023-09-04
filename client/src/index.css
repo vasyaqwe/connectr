@@ -90,6 +90,7 @@ html {
     .navigation-link {
         @apply px-3 py-2 transition-colors rounded-md text-accent-400 hover:bg-accent-100 focus-visible:outline outline-2 outline-accent-300;
     }
+    
     .focus {
         @apply rounded-md focus-visible:outline outline-2 outline-offset-2 outline-accent-300;
     }

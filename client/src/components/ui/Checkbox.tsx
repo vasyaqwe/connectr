@@ -18,6 +18,7 @@ export const Checkbox = ({
     return (
         <div className={`flex flex-wrap items-center gap-2 ${className}`}>
             <button
+                role="checkbox"
                 disabled={disabled}
                 aria-checked={checked}
                 type="button"
