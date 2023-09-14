@@ -22,7 +22,7 @@ const ProfileCard = ({ userId }: { userId: string | undefined }) => {
     const user = userId ? data : guestUser
 
     return (
-        <div className="sticky top-[6rem] hidden lg:block">
+        <div className="sticky top-[6.5rem] hidden lg:block">
             {error ? (
                 <div className="card">
                     <ErrorMessage message={safeError(error)} />
