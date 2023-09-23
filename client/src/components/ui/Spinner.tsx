@@ -1,20 +1,17 @@
 import { cn } from "@/lib/utils"
+import { ComponentProps } from "react"
 
-const variantLookup = {
+const variantLookup: Record<string, string> = {
     default: "text-secondary-400",
     neutral: "text-neutral-700",
     inverse: "text-secondary-400",
 }
 
 type SpinnerProps = {
-    className?: string
     variant?: keyof typeof variantLookup
-}
+} & ComponentProps<"div">
 
-export const Spinner = ({
-    className = "",
-    variant = "default",
-}: SpinnerProps) => {
+export const Spinner = ({ className, variant = "default" }: SpinnerProps) => {
     const fillLookup: { [key: string]: string } = {
         default: "fill-accent-400",
         neutral: "fill-neutral-900",

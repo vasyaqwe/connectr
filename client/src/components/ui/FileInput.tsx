@@ -2,7 +2,6 @@ import { cn } from "@/lib/utils"
 import { ComponentProps, ReactNode, useRef } from "react"
 
 type InputProps = ComponentProps<"input"> & {
-    className?: string
     children: ReactNode
 }
 

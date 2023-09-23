@@ -4,13 +4,12 @@ import { ComponentProps, ReactNode, useState } from "react"
 type TooltipProps = ComponentProps<"div"> & {
     children: ReactNode
     text: string
-    className?: string
 }
 
 export const Tooltip = ({
     children,
     text,
-    className = "",
+    className,
     ...rest
 }: TooltipProps) => {
     const [visible, setVisible] = useState(false)

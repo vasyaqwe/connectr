@@ -3,7 +3,6 @@ import { ComponentProps } from "react"
 
 type InputProps = ComponentProps<"input"> & {
     invalid?: string
-    className?: string
 }
 
 export const Input = ({ invalid, className = "", ...rest }: InputProps) => {

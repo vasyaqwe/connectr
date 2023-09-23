@@ -2,7 +2,6 @@ import { ComponentProps } from "react"
 
 type ErrorMessageProps = ComponentProps<"p"> & {
     message: string
-    className?: string
 }
 
 export const ErrorMessage = ({

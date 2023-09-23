@@ -3,7 +3,6 @@ import { ComponentPropsWithRef, forwardRef } from "react"
 
 type TextareaProps = ComponentPropsWithRef<"textarea"> & {
     invalid?: boolean
-    className?: string
 }
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
