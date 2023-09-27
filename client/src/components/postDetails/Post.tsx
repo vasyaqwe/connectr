@@ -26,7 +26,7 @@ export const Post = forwardRef<HTMLDivElement, { post: PostType }>(
             {
                 onMutate: async () => {
                     // Stop the queries that may affect this operation
-                    await queryClient.cancelQueries(["posts", post._id])
+                    await queryClient.cancelQueries(queryKey)
 
                     const prevData =
                         queryClient.getQueryData<PostType>(queryKey)
