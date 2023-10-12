@@ -21,6 +21,7 @@ const ProfileCard = ({ userId }: { userId: string | undefined }) => {
 
     const user = userId ? data : guestUser
 
+    console.log(user?._id)
     return (
         <div className="sticky top-[6.5rem] hidden lg:block">
             {error ? (
@@ -49,20 +50,31 @@ const ProfileCard = ({ userId }: { userId: string | undefined }) => {
                             </Link>
                         )}
 
-                        <div>
-                            <Link
-                                to={`/users/${userId}`}
-                                className="focus block text-lg font-semibold leading-5 hover:underline"
-                            >
-                                {user?.fullName}
-                            </Link>
-                            <Link
-                                to={`/users/${userId}`}
-                                className="focus text-sm text-neutral-800 hover:underline"
-                            >
-                                @{user?.username}
-                            </Link>
-                        </div>
+                        {user?._id === "guest" ? (
+                            <div>
+                                <p className="focus block text-lg font-semibold leading-6">
+                                    {user?.fullName}
+                                </p>
+                                <p className="focus text-sm text-neutral-800">
+                                    @{user?.username}
+                                </p>
+                            </div>
+                        ) : (
+                            <div>
+                                <Link
+                                    to={`/users/${userId}`}
+                                    className="focus block text-lg font-semibold leading-5 hover:underline"
+                                >
+                                    {user?.fullName}
+                                </Link>
+                                <Link
+                                    to={`/users/${userId}`}
+                                    className="focus text-sm text-neutral-800 hover:underline"
+                                >
+                                    @{user?.username}
+                                </Link>
+                            </div>
+                        )}
                     </div>
                     <p className="flex items-start gap-2">
                         <img
